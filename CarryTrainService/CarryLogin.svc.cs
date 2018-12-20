@@ -18,5 +18,21 @@ namespace CarryTrainService
         {
 
         }
+
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public void VerificationCode()
+        {
+
+
+        }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        public void LogIn()
+        {
+        }
     }
 }

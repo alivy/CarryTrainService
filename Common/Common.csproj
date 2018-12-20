@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +48,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Help\ConstString.cs" />
+    <Compile Include="Help\DESEncrypt.cs" />
+    <Compile Include="Help\DictionaryHelper.cs" />
+    <Compile Include="Help\Email.cs" />
+    <Compile Include="Help\Encrypt_Helper.cs" />
+    <Compile Include="Help\HttpPosts.cs" />
+    <Compile Include="Help\IDCardValidation.cs" />
+    <Compile Include="Help\IOHelper.cs" />
+    <Compile Include="Help\JsonHelper.cs" />
+    <Compile Include="Help\MailHelper.cs" />
+    <Compile Include="Help\Md5Algorithm.cs" />
+    <Compile Include="Help\RegExpStr.cs" />
+    <Compile Include="Help\RSAFromPkcs8.cs" />
+    <Compile Include="Help\RSAHelper.cs" />
+    <Compile Include="Help\SessionManager.cs" />
+    <Compile Include="Help\SignHelper.cs" />
+    <Compile Include="Help\StringHelper.cs" />
+    <Compile Include="Help\ValidateHelper.cs" />
+    <Compile Include="Help\WebHelper.cs" />
+    <Compile Include="Help\XmlHelper.cs" />
+    <Compile Include="Log4Net\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HttpHelp\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
