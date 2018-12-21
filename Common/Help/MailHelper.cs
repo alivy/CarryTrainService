@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 
 
-namespace Utils工具
+namespace Common
 {
     public static class MailHelper
     {

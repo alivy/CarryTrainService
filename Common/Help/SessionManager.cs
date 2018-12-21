@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Utils工具
+namespace Common
 {
     public class SessionManager
     {

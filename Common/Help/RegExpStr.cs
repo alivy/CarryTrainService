@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// 常用正则表达式字符串

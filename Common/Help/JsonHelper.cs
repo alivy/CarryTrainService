@@ -8,7 +8,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 
 
-namespace Utils工具
+namespace Common
 {
     public class JsonHelper
     {

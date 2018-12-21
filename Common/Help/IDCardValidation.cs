@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>  
     /// 验证身份证号码类  

@@ -19,16 +19,16 @@ namespace CarryTrainService
         /// <summary>
         /// 余票查询
         /// </summary>
-        [OperationContract]
         public void SurplusTicketQuery()
         {
+
         }
 
         /// <summary>
         /// 购票
         /// </summary>
-        [OperationContract]
-        public void TicketPurchase() {
+        public void TicketPurchase()
+        {
 
         }
     }

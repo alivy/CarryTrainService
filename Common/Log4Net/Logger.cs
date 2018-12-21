@@ -6,35 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Utils工具
+namespace Common
 {
-    //public class Logger
-    //{
-    //    private static log4net.ILog log = log4net.LogManager.GetLogger("Error");
-    //    /// <summary>
-    //    /// 写异常日志
-    //    /// </summary>
-    //    /// <param name="ex">异常类对象</param>
-    //    public static void WriteException(Exception ex)
-    //    {
-    //        log.Error("程序出现异常", ex);
-
-    //    }
-    //    /// <summary>
-    //    /// 写入错误信息
-    //    /// </summary>
-    //    /// <param name="msg">要写入的信息</param>
-    //    public static void WirteMessageLog(string msg)
-    //    {
-    //        log.Error(msg);
-    //    }
-    //}
     /// <summary>
     /// 日志类
     /// </summary>
     public class Logger
     {
         private static readonly object LogLock = new object();
+        /// <summary>
+        /// 写入异常日志
+        /// </summary>
+        /// <param name="ex"></param>
         public static void WriteException(Exception ex)
         {
             // 写入日志
@@ -119,7 +102,10 @@ namespace Utils工具
         }
 
 
-
+        /// <summary>
+        /// 文件流日志写入
+        /// </summary>
+        /// <param name="msg"></param>
         public static void AddLog(string msg)
         {
             //string saveFolder="Models";
@@ -158,7 +144,10 @@ namespace Utils工具
             }
         }
 
-
+        /// <summary>
+        /// 写入换行
+        /// </summary>
+        /// <param name="rows"></param>
         public static void AddLine(int rows)
         {
             try

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Utils工具
+namespace Common
 {
     public  class Email
     {

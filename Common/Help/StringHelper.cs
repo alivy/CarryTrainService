@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// 字符串操作类

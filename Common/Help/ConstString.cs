@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// 用于Session的常量字符串

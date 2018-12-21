@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Utils工具
+namespace Common
 {
     /**
 	 * 32位MD5摘要算法

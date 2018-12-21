@@ -7,7 +7,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Utils工具
+namespace Common
 {
     public class HttpPosts
     {

@@ -12,7 +12,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// Web帮助类

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace Utils工具
+namespace Common
 {
     public class Encrypt_Helper
     {

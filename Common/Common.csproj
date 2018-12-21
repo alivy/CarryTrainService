@@ -65,13 +65,19 @@
     <Compile Include="Help\SessionManager.cs" />
     <Compile Include="Help\SignHelper.cs" />
     <Compile Include="Help\StringHelper.cs" />
+    <Compile Include="Help\TrainInterface.cs" />
     <Compile Include="Help\ValidateHelper.cs" />
     <Compile Include="Help\WebHelper.cs" />
     <Compile Include="Help\XmlHelper.cs" />
+    <Compile Include="Log4Net\Log.cs" />
     <Compile Include="Log4Net\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\log.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\logger.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

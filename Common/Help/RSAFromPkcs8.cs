@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// 类名：RSAFromPkcs8

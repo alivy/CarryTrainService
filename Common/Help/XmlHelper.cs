@@ -9,7 +9,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// Xml操作类

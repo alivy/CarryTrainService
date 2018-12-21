@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace Utils工具
+namespace Common
 {
     /// <summary>
     /// 必需用XPATH表达式来获取相应节点
