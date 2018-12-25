@@ -1,10 +1,8 @@
 ﻿
 @{
-    Layout = null;
+    //Layout = null;
     ViewBag.Title = "Login";
 }
-
-
 <!doctype html>
 <html>
 <head>
@@ -29,27 +27,98 @@
             </div>
             <!-- 输入框 -->
             <div class="lgD">
-                <img src="img/logName.png" width="20" height="20" alt="" />
-                <input type="text" placeholder="输入用户名" />
+                <img src="" width="20" height="20" alt="" />
+                <input type="text" id="userName" placeholder="输入用户名" />
             </div>
 
             <div class="lgD">
-                <img src="img/logPwd.png" width="20" height="20" alt="" />
-                <input type="text" placeholder="输入用户密码" />
+                <img src="" width="20" height="20" alt="" />
+                <input type="text" id="userPwd" placeholder="输入用户密码" />
             </div>
 
             <div class="lgD" id="code">
-                <img src="https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.08162681051806264" style="width:293px;height:190px;position:unset" />
+                <img src="~/Material/Img/timg.gif" style="width:293px;height:190px;position:unset" />
             </div>
 
             <div class="logC">
-                <a href="index.html" target="_self">
-                <button>登 录</button></a>
+                <a class="submitlogin">
+                    <button>登 录</button>
+                </a>
             </div>
         </div>
     </div>
 
     <script>
+        var url = "https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.08162681051806264";
+        // var ua = UserAgent(verify_ssl = False)
+        var header =
+        {
+            "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0",
+            "Host": "kyfw.12306.cn",
+            "Referer": "https://kyfw.12306.cn/otn/passport?redirect=/otn/"
+        };
+
+        $(".logC").click(function () {
+            submitLogin();
+        });
+
+
+        $(function () {
+            login();
+        });
+
+        function login() {
+            //打开登录页面
+            url = "https://kyfw.12306.cn/otn/login/init"
+            toAjax(url, header, "");
+        }
+
+        function uamtk() {
+            url = "https://kyfw.12306.cn/passport/web/auth/uamtk";
+            data = { "appid": "otn" };
+            result = toAjax(url, header, data);
+        }
+
+
+
+        function submitLogin() {
+            var userName = $("#userName").text;
+            var userPwd = $("#userPwd").text;
+            data = {
+                "username": "17620372030",
+                "password": "yanhaomiao123",
+                "appid": "otn"
+            }
+            url = "https://kyfw.12306.cn/passport/web/login"
+            response = toAjax(url, header, data)
+            if (response.status_code == 200) {
+                result = json.loads(response.text);
+                print(result.get("result_message"), result.get("result_code"));
+                //if result.get("result_code") != 0:
+                //    return False
+            }
+        }
+
+
+
+
+
+        function toAjax(url, header, data) {
+            $.ajax({
+                url: url,
+                type: 'post',
+                headers: header,
+                data: data,    // type: 默认返回的是头条，可以选择的，这个。
+                dataType: 'json',
+                success: function (msg) {
+                    console.log(msg)
+                    return data;
+                },
+                error: function (err) {
+                    alert('通信失败', err.error);
+                }
+            });
+        }
 
     </script>
 </body>

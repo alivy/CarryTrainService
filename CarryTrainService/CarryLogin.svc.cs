@@ -24,7 +24,7 @@ namespace CarryTrainService
             //请求头
             var headers = new
             {
-                User - Agent = "ua.random",
+                User_Agent = "ua.random",
                 Host = "kyfw.12306.cn",
                 Referer = "https://kyfw.12306.cn/otn/passport?redirect=/otn/"
             };

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Help\Class1.cs" />
     <Compile Include="Help\ConstString.cs" />
     <Compile Include="Help\DESEncrypt.cs" />
     <Compile Include="Help\DictionaryHelper.cs" />
