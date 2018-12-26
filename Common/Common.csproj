@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Help\Class1.cs" />
+    <Compile Include="Help\TrainHttpContext.cs" />
     <Compile Include="Help\ConstString.cs" />
     <Compile Include="Help\DESEncrypt.cs" />
     <Compile Include="Help\DictionaryHelper.cs" />
@@ -80,6 +80,12 @@
     </None>
     <None Include="Config\logger.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1dfadd96-a37d-4776-ae24-b875f7037bf9}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

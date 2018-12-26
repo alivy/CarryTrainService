@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +42,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CheckLoginData.cs" />
+    <Compile Include="Data\CheckOrderInfoData.cs" />
+    <Compile Include="Data\DataTypes.cs" />
+    <Compile Include="Data\LimitBuySeatTicket.cs" />
+    <Compile Include="Data\LoginData.cs" />
+    <Compile Include="Data\PassengerData.cs" />
+    <Compile Include="Data\PassengerDetail.cs" />
+    <Compile Include="Data\PassengerForm.cs" />
+    <Compile Include="Data\QueryLeftNewDetail.cs" />
+    <Compile Include="Data\QueryLeftTicketRequest.cs" />
+    <Compile Include="Data\QueryTrainData.cs" />
+    <Compile Include="Data\QueueCountData.cs" />
+    <Compile Include="Data\SubmitData.cs" />
+    <Compile Include="Data\TicketInfoForPassengerForm.cs" />
+    <Compile Include="RequestPackage.cs" />
+    <Compile Include="ResBase.cs" />
+    <Compile Include="ResponseBase.cs" />
+    <Compile Include="ResponseCheckLogin.cs" />
+    <Compile Include="ResponseCheckOrderInfo.cs" />
+    <Compile Include="ResponseLogin.cs" />
+    <Compile Include="ResponsePassenger.cs" />
+    <Compile Include="ResponseQuery.cs" />
+    <Compile Include="ResponseQueueCount.cs" />
+    <Compile Include="ResponseSubmit.cs" />
+    <Compile Include="ResponseUamtk.cs" />
     <Compile Include="TrainVerificationCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

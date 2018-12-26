@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Net;
 
-namespace CarryTrainWeb.Models
+namespace Model
 {
     [Serializable]
     public class RequestPackage
@@ -29,12 +30,12 @@ namespace CarryTrainWeb.Models
 
         #region 属性
 
-        public string RequestURL
+        public string RequestURL 
         {
             get { return this._requestURL; }
             set { this._requestURL = value; }
         }
-        public string RefererURL
+        public string RefererURL 
         {
             get { return this._refererURL; }
             set { this._refererURL = value; }

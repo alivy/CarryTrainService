@@ -25,6 +25,7 @@
             <div class="logD logDtip">
                 <p class="p1">登录</p>
             </div>
+
             <!-- 输入框 -->
             <div class="lgD">
                 <img src="" width="20" height="20" alt="" />
@@ -37,7 +38,7 @@
             </div>
 
             <div class="lgD" id="code">
-                <img src="~/Material/Img/timg.gif" style="width:293px;height:190px;position:unset" />
+                <img id="imgCode" src="~/Material/Img/timg.gif" style="width:293px;height:190px;position:unset" />
             </div>
 
             <div class="logC">
@@ -49,6 +50,39 @@
     </div>
 
     <script>
+        $(function () {
+            TrainCode();
+        });
+
+        //获取验证码
+        function TrainCode() {
+                $.ajax({
+                    url: "VerificationCode",
+                    type: 'post',
+                    headers: header,
+                    data: "",    // type: 默认返回的是头条，可以选择的，这个。
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $("#imgCode").attr("src", "../Material/Img/timg.gif");
+                    },
+                    success: function (obj) {
+                        console.log(obj)
+                        if (obj != null) {
+                            if (obj.status)
+                                $("#imgCode").attr("src", "../"+obj.path);
+                        }
+                        else {
+                            console.log("获取验证码失败")
+                            $("#imgCode").attr("src", "../Material/Img/loadLose.png");
+                        }
+                    },
+                    error: function (err) {
+                        alert('通信失败', err.error);
+                    }
+                });
+        }
+
+
         var url = "https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.08162681051806264";
         // var ua = UserAgent(verify_ssl = False)
         var header =
@@ -63,9 +97,7 @@
         });
 
 
-        $(function () {
-            login();
-        });
+
 
         function login() {
             //打开登录页面
@@ -103,23 +135,11 @@
 
 
 
-        function toAjax(url, header, data) {
-            $.ajax({
-                url: url,
-                type: 'post',
-                headers: header,
-                data: data,    // type: 默认返回的是头条，可以选择的，这个。
-                dataType: 'json',
-                success: function (msg) {
-                    console.log(msg)
-                    return data;
-                },
-                error: function (err) {
-                    alert('通信失败', err.error);
-                }
-            });
-        }
+        function toAjax(url, header = "", data = "") {
+            var msg;
 
+            return msg;
+        }
     </script>
 </body>
 </html>
