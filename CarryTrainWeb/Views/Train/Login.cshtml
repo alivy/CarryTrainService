@@ -93,9 +93,34 @@
         };
 
         $(".logC").click(function () {
-            submitLogin();
+            //submitLogin();
+            checkCode();
         });
 
+
+
+        function checkCode() {
+            var point = $("#userName").val();
+            var data = {
+                "point": point
+            };
+            $.ajax({
+                url: "CheckCode",
+                type: 'post',
+                headers: header,
+                data: data,    // type: 默认返回的是头条，可以选择的，这个。
+                dataType: 'json',
+                beforeSend: function () {
+                    $("#imgCode").attr("src", "../Material/Img/timg.gif");
+                },
+                success: function (obj) {
+                    console.log(obj)
+                },
+                error: function (err) {
+                    alert('通信失败', err.error);
+                }
+            });
+        }
 
 
 

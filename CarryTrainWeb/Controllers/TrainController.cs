@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Web.Mvc;
+using TrainBLL;
 
 namespace CarryTrainWeb.Controllers
 {
@@ -29,23 +30,62 @@ namespace CarryTrainWeb.Controllers
         [HttpPost]
         public ActionResult VerificationCode()
         {
-            var code = this.GetValidateCode();
+            LoginBll train = new LoginBll();
+           
+            string url = Server.MapPath(@"..\Material\Img\code");
+            Log.Write(LogLevel.Info, "文件保存路径"+ url);
+            var code = train.GetValidateCode(url);
             var obj = new
             {
                 status = code.Item1,
-                path = code.Item2
+                path = @"Material/Img/code/"+code.Item2
             };
             return Json(obj);
         }
 
-       
+
+        /// <summary>
+        /// 验证码验证
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CheckCode(string point)
+        {
+            var train = new LoginBll();
+            var check = train.PostCaptchaCheck(point);
+            var obj = new
+            {
+                status = check.result_code,
+                path = check.result_message
+            };
+            return Json(obj);
+        }
+
+
+        /// <summary>
+        /// 验证码验证
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CheckCodePiece(int[] xy)
+        {
+            var train = new LoginBll();
+            string point = train.getPoint(xy);
+            var check = train.PostCaptchaCheck(point);
+            var obj = new
+            {
+                status = check.result_code,
+                path = check.result_message
+            };
+            return Json(obj);
+        }
 
         /// <summary>
         /// 登陆信息
         /// </summary>
         /// <param name="user"></param>
         [HttpPost]
-        public  void PostLogin(UserInfo user)
+        public void PostLogin(UserInfo user)
         {
             RequestPackage request = new RequestPackage();
             request.Params.Add("username", System.Web.HttpUtility.UrlEncode(user.loginName));
@@ -69,7 +109,8 @@ namespace CarryTrainWeb.Controllers
                 }
                 else
                 {
-                    GetValidateCode();
+                  string url =  Server.MapPath(@"..\Material\Img\code");
+                    new LoginBll().GetValidateCode(url);
                 }
             }
             else
@@ -80,96 +121,8 @@ namespace CarryTrainWeb.Controllers
 
 
 
-      
-        #region 验证码
-        /// <summary>
-        /// 获取验证码
-        /// </summary>
-        private Tuple<bool, string> GetValidateCode()
-        {
-            var status = false;
-            string path = string.Empty;
-            try
-            {
-                RequestPackage request = new RequestPackage("/otn/login/init");
-                ArrayList list = TrainHttpContext.GetHtmlData(request);
-                if (list.Count == 3)
-                {
-                    request.RequestURL = "/passport/captcha/captcha-image";
-                    request.Params.Add("login_site", "E");
-                    request.Params.Add("module", "login");
-                    request.Params.Add("rand", "sjrand");
-                    request.Params.Add("0.21660476430599007", "");
-                    using (Stream stream = TrainHttpContext.DownloadCode(request))
-                    {
-                        path = Path.Combine(@"Material\Img\code", list[2] + ".png");
-                        status = this.SaveValidateCode(stream, path);
-                    }
-                }
-                else
-                {
-                    Log.Write(LogLevel.Info, "请求/otn/login/init失败");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Write(LogLevel.Error, ex.Message, ex);
-            }
-            return new Tuple<bool, string>(status, path);
-        }
-        /// <summary>
-        ///保存验证码
-        /// </summary>
-        private bool SaveValidateCode(Stream stream, string url)
-        {
-            var result = false;
-            try
-            {
-                if (stream == null)
-                {
-                    Log.Write(LogLevel.Info, "获取验证码失败");
-                }
-                var mappath = Server.MapPath("../" + url);
-                var img = Image.FromStream(stream);
-                img.Save(mappath, ImageFormat.Bmp);
-                result = true;
-            }
-            catch (Exception ex)
-            {
-                Log.Write(LogLevel.Error, "获取验证码失败", ex);
-            }
-            return result;
-        }
 
 
-
-
-
-        /// <summary>
-        /// 验证验证码
-        /// </summary>
-        public void PostCaptchaCheck()
-        {
-            RequestPackage request = new RequestPackage();
-            request.Params.Add("answer", System.Web.HttpUtility.UrlEncode("0，258,69,58"));
-            request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
-            request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
-            request.RequestURL = "/passport/captcha/captcha-check";
-            request.RefererURL = "/otn/login/init";
-            request.Method = "post";
-            ArrayList list = TrainHttpContext.Send(request);
-            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-            ResponseUamtk package = JsonConvert.DeserializeObject<ResponseUamtk>(jsonResult);
-            if (package.status_code == 200)
-            {
-
-            }
-            Log.Write(LogLevel.Info, jsonResult);
-        }
-
-
-
-        #endregion
 
     }
 }

@@ -104,6 +104,10 @@ namespace Common.Help
                 {
                     using (Stream st = webResponse.GetResponseStream())
                     {
+                        if (webResponse.Cookies.Count > 0)
+                        {
+                            Cookie.Add(webResponse.Cookies);
+                        }
                         stream = new MemoryStream();
                         while (true)
                         {
