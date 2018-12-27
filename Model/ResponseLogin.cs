@@ -21,6 +21,11 @@ namespace Model
         public int result_code { get; set; }
 
         /// <summary>
+        /// 返回码
+        /// </summary>
+        public string  uamtk { get; set; }
+
+        /// <summary>
         /// 状态码 200表示成功
         /// </summary>
         public int status_code { get; set; }

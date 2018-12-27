@@ -8,10 +8,8 @@ namespace Model
 {
     public class ResponseUamtk: ResBase
     {
-        /// <summary>
-        /// newapptk
-        /// </summary>
         public string newapptk { get; set; }
-
+        
+       
     }
 }

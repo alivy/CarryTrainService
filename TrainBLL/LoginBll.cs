@@ -19,7 +19,7 @@ namespace TrainBLL
     /// </summary>
     public class LoginBll
     {
-
+        #region 登陆逻辑
         public ResponseLogin PostLogin(string loginName, string loginPwd)
         {
             RequestPackage request = new RequestPackage();
@@ -34,13 +34,10 @@ namespace TrainBLL
             {
                 string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
                 ResponseLogin package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
-                if (package.status_code == 200)
+                PostUamtk();
+                if (package.result_code != 0)
                 {
-                    if (package.result_code != 0)
-                    {
-                        PostUamtk();
-                        Log.Write(LogLevel.Info, package.result_message);
-                    }
+                    Log.Write(LogLevel.Info, package.result_message);
                 }
                 Log.Write(LogLevel.Info, jsonResult);
                 return package;
@@ -56,37 +53,34 @@ namespace TrainBLL
         public void PostUamtk()
         {
             RequestPackage request = new RequestPackage();
+            request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
             request.RequestURL = "/passport/web/auth/uamtk";
-            request.RefererURL = "/otn/login/init";
+            request.RefererURL = "/otn/passport?redirect=/otn/login/userLogin";
             request.Method = "post";
             ArrayList list = TrainHttpContext.Send(request);
-
             string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             ResponseUamtk package = JsonConvert.DeserializeObject<ResponseUamtk>(jsonResult);
-            if (package.status_code == 200)
-            {
-                if (package.result_code != 0)
-                {
-                    PostUamtk();
-                    Log.Write(LogLevel.Info, package.result_message);
-                }
-            }
             Log.Write(LogLevel.Info, jsonResult);
+            PostUamauthClient(package.newapptk);
         }
 
-        public void PostUamauthClient()
+
+
+        public void PostUamauthClient(string tk)
         {
             RequestPackage request = new RequestPackage();
+            request.Params.Add("tk", System.Web.HttpUtility.UrlEncode(tk));
             request.RequestURL = "/otn/uamauthclient";
             request.RefererURL = "/otn/passport?redirect=/otn/login/userLogin";
             request.Method = "post";
             ArrayList list = TrainHttpContext.Send(request);
 
             string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-            ResponseUamtk package = JsonConvert.DeserializeObject<ResponseUamtk>(jsonResult);
-            if (package.status_code == 200)
+            ResponseUamauthClient package = JsonConvert.DeserializeObject<ResponseUamauthClient>(jsonResult);
+            if (package.result_code == 0)
             {
-
+                PostConf();
+                PostInitMy12306();
             }
             Log.Write(LogLevel.Info, jsonResult);
         }
@@ -115,6 +109,9 @@ namespace TrainBLL
             Log.Write(LogLevel.Info, jsonResult);
         }
 
+        #endregion
+
+        #region 验证码逻辑
         /// <summary>
         /// 验证验证码
         /// </summary>
@@ -233,5 +230,6 @@ namespace TrainBLL
             }
             return result;
         }
+        #endregion
     }
 }

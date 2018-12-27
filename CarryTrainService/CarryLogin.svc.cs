@@ -1,6 +1,9 @@
 ﻿
 
 
+using Common.Help;
+using System.Collections.Generic;
+using System.IO;
 using TrainBLL;
 
 namespace CarryTrainService
@@ -22,8 +25,46 @@ namespace CarryTrainService
         /// </summary>
         public void VerificationCode()
         {
-        
+
+            #region 获取登录验证码
+            string url = "https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand";
+
+            Stream stream = TrainHttp.GetStreamByGet(url);
+            if (stream != null)
+            {
+                List<byte> bytes = new List<byte>();
+                int i = stream.ReadByte();
+                while (i != -1)
+                {
+                    bytes.Add((byte)i);
+                    i = stream.ReadByte();
+                }
+                //context.Response.Clear();
+                //context.Response.ContentType = "image/jpeg";
+                //context.Response.BinaryWrite(bytes.ToArray());
+            }
+            #endregion
+
         }
+
+        /// <summary>
+        /// 校验验证码
+        /// </summary>
+        /// <param name="answer">坐标值</param>
+        public string ValidateCode(string answer)
+        {
+            #region 校验验证码
+
+            if (!string.IsNullOrEmpty(answer))
+            {
+                return "坐标值不能为空";
+            }
+            string url = "https://kyfw.12306.cn/passport/captcha/captcha-check";//
+            string result = TrainHttp.GetValidhtmlByPost(url, "answer=" + answer + "&login_site=E&rand=sjrand");
+            return result;
+            #endregion
+        }
+
 
         #region 实现逻辑
         ////请求头
@@ -84,7 +125,7 @@ namespace CarryTrainService
         /// 登录
         /// </summary>
         public void LogIn()
-    {
+        {
+        }
     }
-}
 }

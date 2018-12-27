@@ -37,6 +37,11 @@
                 <input type="text" id="userPwd" placeholder="输入用户密码" />
             </div>
 
+            <div class="lgD">
+                <img src="" width="20" height="20" alt="" />
+                <input type="text" id="pointode" placeholder="请输入坐标" />
+            </div>
+
             <div class="lgD" id="code">
                 <img id="imgCode" src="~/Material/Img/timg.gif" style="width:293px;height:190px;position:unset" />
             </div>
@@ -100,7 +105,7 @@
 
 
         function checkCode() {
-            var point = $("#userName").val();
+            var point = $("#pointode").val();
             var data = {
                 "point": point
             };
