@@ -55,54 +55,41 @@
     </div>
 
     <script>
+
         $(function () {
             TrainCode();
         });
 
         //获取验证码
         function TrainCode() {
-                $.ajax({
-                    url: "VerificationCode",
-                    type: 'post',
-                    headers: header,
-                    data: "",    // type: 默认返回的是头条，可以选择的，这个。
-                    dataType: 'json',
-                    beforeSend: function () {
-                        $("#imgCode").attr("src", "../Material/Img/timg.gif");
-                    },
-                    success: function (obj) {
-                        console.log(obj)
-                        if (obj != null) {
-                            if (obj.status)
-                                $("#imgCode").attr("src", "../"+obj.path);
-                        }
-                        else {
-                            console.log("获取验证码失败")
-                            $("#imgCode").attr("src", "../Material/Img/loadLose.png");
-                        }
-                    },
-                    error: function (err) {
-                        alert('通信失败', err.error);
+            $.ajax({
+                url: "VerificationCode",
+                type: 'post',
+                data: "",    // type: 默认返回的是头条，可以选择的，这个。
+                dataType: 'json',
+                beforeSend: function () {
+                    $("#imgCode").attr("src", "../Material/Img/timg.gif");
+                },
+                success: function (obj) {
+                    console.log(obj)
+                    if (obj != null) {
+                        if (obj.code == 0)
+                            $("#imgCode").attr("src", "../" + obj.url);
                     }
-                });
+                    else {
+                        console.log("获取验证码失败")
+                        $("#imgCode").attr("src", "../Material/Img/loadLose.png");
+                    }
+                },
+                error: function (err) {
+                    alert('通信失败', err.error);
+                }
+            });
         }
 
-
-        var url = "https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand&0.08162681051806264";
-        // var ua = UserAgent(verify_ssl = False)
-        var header =
-        {
-            "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0",
-            "Host": "kyfw.12306.cn",
-            "Referer": "https://kyfw.12306.cn/otn/passport?redirect=/otn/"
-        };
-
         $(".logC").click(function () {
-            //submitLogin();
             checkCode();
         });
-
-
 
         function checkCode() {
             var point = $("#pointode").val();
@@ -112,7 +99,33 @@
             $.ajax({
                 url: "CheckCode",
                 type: 'post',
-                headers: header,
+                data: data,    // type: 默认返回的是头条，可以选择的，这个。
+                dataType: 'json',
+                beforeSend: function () {
+                    $("#imgCode").attr("src", "../Material/Img/timg.gif");
+                },
+                success: function (obj) {
+                    console.log(obj)
+                    if (obj.code == 0) {
+                        Login();
+                    }
+                },
+                error: function (err) {
+                    alert('通信失败', err.error);
+                }
+            });
+        }
+
+        function Login() {
+            var loginName = "17620372030";
+            var loginPwd = "yanhaomiao123";
+            var data = {
+                "loginName": loginName,
+                "loginPwd": loginPwd
+            };
+            $.ajax({
+                url: "PostLogin",
+                type: 'post',
                 data: data,    // type: 默认返回的是头条，可以选择的，这个。
                 dataType: 'json',
                 beforeSend: function () {
@@ -127,49 +140,6 @@
             });
         }
 
-
-
-        function login() {
-            //打开登录页面
-            url = "https://kyfw.12306.cn/otn/login/init"
-            toAjax(url, header, "");
-        }
-
-        function uamtk() {
-            url = "https://kyfw.12306.cn/passport/web/auth/uamtk";
-            data = { "appid": "otn" };
-            result = toAjax(url, header, data);
-        }
-
-
-
-        function submitLogin() {
-            var userName = $("#userName").text;
-            var userPwd = $("#userPwd").text;
-            data = {
-                "username": "17620372030",
-                "password": "yanhaomiao123",
-                "appid": "otn"
-            }
-            url = "https://kyfw.12306.cn/passport/web/login"
-            response = toAjax(url, header, data)
-            if (response.status_code == 200) {
-                result = json.loads(response.text);
-                print(result.get("result_message"), result.get("result_code"));
-                //if result.get("result_code") != 0:
-                //    return False
-            }
-        }
-
-
-
-
-
-        function toAjax(url, header = "", data = "") {
-            var msg;
-
-            return msg;
-        }
     </script>
 </body>
 </html>

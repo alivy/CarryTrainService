@@ -57,6 +57,7 @@
     <Compile Include="Data\QueueCountData.cs" />
     <Compile Include="Data\SubmitData.cs" />
     <Compile Include="Data\TicketInfoForPassengerForm.cs" />
+    <Compile Include="Enum\LoginEnum.cs" />
     <Compile Include="RequestPackage.cs" />
     <Compile Include="ResBase.cs" />
     <Compile Include="ResponseBase.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ResponseSubmit.cs" />
     <Compile Include="ResponseUamauthClient.cs" />
     <Compile Include="ResponseUamtk.cs" />
+    <Compile Include="Result\ResultModel.cs" />
     <Compile Include="TrainVerificationCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

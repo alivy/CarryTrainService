@@ -31,16 +31,17 @@ namespace CarryTrainWeb.Controllers
         public ActionResult VerificationCode()
         {
             LoginBll train = new LoginBll();
-
             string url = Server.MapPath(@"..\Material\Img\code");
             Log.Write(LogLevel.Info, "文件保存路径" + url);
             var code = train.GetValidateCode(url);
-            var obj = new
+            var result = new
             {
-                status = code.Item1,
-                path = @"Material/Img/code/" + code.Item2
+                code = code.Item1,
+                msg = (code.Item1 == 0) ? "获取图片成功" : "获取图片失败",
+                //真实数据+ http://www.ihavedream.top/
+                url = @"Material/Img/code/"+code.Item2
             };
-            return Json(obj);
+            return Json(result);
         }
 
 
@@ -52,20 +53,15 @@ namespace CarryTrainWeb.Controllers
         public ActionResult CheckCode(string point)
         {
             var train = new LoginBll();
-            var check = train.PostCaptchaCheck(point);
-            if (check.result_code == 4)
+            string jsonResult;
+            var check = train.PostCaptchaCheck(point, out jsonResult);
+            var result = new ResultModel()
             {
-                UserInfo user = new UserInfo();
-                user.loginName = "17620372030";
-                user.loginPwd = "yanhaomiao123";
-                var result = new LoginBll().PostLogin(user.loginName, user.loginPwd);
-            }
-            var obj = new
-            {
-                status = check.result_code,
-                message = check.result_message
+                code = check.result_code == 4 ? 0 : check.result_code,
+                msg = check.result_message,
+                data = jsonResult
             };
-            return Json(obj);
+            return Json(result);
         }
 
 
@@ -80,15 +76,15 @@ namespace CarryTrainWeb.Controllers
         [HttpPost]
         public ActionResult CheckCodePiece(int[] xy)
         {
+            var result = new ResultModel();
             var train = new LoginBll();
             string point = train.getPoint(xy);
-            var check = train.PostCaptchaCheck(point);
-            var obj = new
-            {
-                status = check.result_code,
-                path = check.result_message
-            };
-            return Json(obj);
+            string jsonResult;
+            var check = train.PostCaptchaCheck(point, out jsonResult);
+            result.code = check.result_code == 4 ? 0 : check.result_code;
+            result.msg = check.result_message;
+            result.data = jsonResult;
+            return Json(result);
         }
 
         /// <summary>
@@ -96,31 +92,80 @@ namespace CarryTrainWeb.Controllers
         /// </summary>
         /// <param name="user"></param>
         [HttpPost]
-        public ResponseLogin PostLogin(UserInfo user)
+        public ActionResult PostLogin(UserInfo user)
         {
-
-            ResponseLogin package = null;
-            RequestPackage request = new RequestPackage();
-            request.Params.Add("username", System.Web.HttpUtility.UrlEncode(user.loginName));
-            request.Params.Add("password", System.Web.HttpUtility.UrlEncode(user.loginPwd));
-            request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
-            request.RequestURL = "/passport/web/login";
-            request.RefererURL = "/otn/login/init";
-            request.Method = "post";
-            ArrayList list = TrainHttpContext.Send(request);
-            if (list.Count == 2)
+            string data = string.Empty;
+            var result = new ResultModel();
+            var train = new LoginBll();
+            do
             {
-                string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-                package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
-                Log.Write(LogLevel.Info, list.ToString());
-                //刷新验证码
-                //string url = Server.MapPath(@"..\Material\Img\code");
-                //new LoginBll().GetValidateCode(url);
+                var check = UserCheck(user);
+                if (check.Item1 != 0)
+                {
+                    result.code = check.Item1;
+                    result.msg = check.Item2;
+                    break;
+                }
+
+                var login = train.PostLogin(user.loginName, user.loginPwd, out data);
+                if (login.result_code != 0)
+                {
+                    result.code = login.result_code;
+                    result.msg = login.result_message;
+                    result.data = data;
+                    break;
+                }
+
+                var tk = train.PostUamtk(out data);
+                if (tk.result_code != 0)
+                {
+                    result.code = tk.result_code;
+                    result.msg = tk.result_message;
+                    result.data = data;
+                    break;
+                }
+
+                var apptk = train.PostUamauthClient(tk.newapptk, out data);
+                result.code = apptk.result_code;
+                result.msg = apptk.result_message;
+                result.data = data;
+                if (apptk.result_code == 0)
+                {
+                    var obj = new
+                    {
+                        apptkdata = data,
+                        confdata = train.PostConf(),
+                        InitMydata = train.PostInitMy12306()
+                    };
+                    result.data = JsonHelper.Serialize(obj);
+                }
+            } while (false);
+            return Json(result);
+        }
+
+        /// <summary>
+        /// 验证账号密码
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private Tuple<int, string> UserCheck(UserInfo user)
+        {
+            int status = 0;
+            string msg = string.Empty;
+
+            if (string.IsNullOrEmpty(user.loginName))
+            {
+                status = 888;
+                msg = "用户名不为空";
             }
-            return package;
+            if (string.IsNullOrEmpty(user.loginPwd))
+            {
+                status = 888;
+                msg = "密码不为空";
+            }
+            return new Tuple<int, string>(status, msg);
         }
 
 
-       
     }
 }

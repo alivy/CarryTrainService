@@ -24,7 +24,7 @@ namespace Service.Test
             UserInfo user = new UserInfo();
             user.loginName = "17620372030";
             user.loginPwd = "yanhaomiao123";
-            var result = new LoginBll().PostLogin(user.loginName, user.loginPwd);
+           // var result = new LoginBll().PostLogin(user.loginName, user.loginPwd);
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Service.Test
         public void TestPostCaptchaCheck()
         {
             var train = new LoginBll();
-            string point = train.getPoint(new int[] { 4 });
-            var check = train.PostCaptchaCheck(point);
+            //string point = train.getPoint(new int[] { 4 });
+           // var check = train.PostCaptchaCheck(point);
         }
 
 

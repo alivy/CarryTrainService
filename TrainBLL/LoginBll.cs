@@ -20,8 +20,10 @@ namespace TrainBLL
     public class LoginBll
     {
         #region 登陆逻辑
-        public ResponseLogin PostLogin(string loginName, string loginPwd)
+        public ResponseLogin PostLogin(string loginName, string loginPwd, out string jsonResult)
         {
+            jsonResult = string.Empty;
+            ResponseLogin package = null;
             RequestPackage request = new RequestPackage();
             request.Params.Add("username", System.Web.HttpUtility.UrlEncode(loginName));
             request.Params.Add("password", System.Web.HttpUtility.UrlEncode(loginPwd));
@@ -32,25 +34,21 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             if (list.Count == 2)
             {
-                string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-                ResponseLogin package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
-                PostUamtk();
-                if (package.result_code != 0)
-                {
-                    Log.Write(LogLevel.Info, package.result_message);
-                }
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
                 Log.Write(LogLevel.Info, jsonResult);
-                return package;
-                // GetValidateCode();
             }
             else
             {
                 Log.Write(LogLevel.Info, list.ToString());
             }
-            return null;
+            return package;
         }
 
-        public void PostUamtk()
+        /// <summary>
+        /// 获取tk
+        /// </summary>
+        public ResponseUamtk PostUamtk(out string jsonResult)
         {
             RequestPackage request = new RequestPackage();
             request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
@@ -58,15 +56,18 @@ namespace TrainBLL
             request.RefererURL = "/otn/passport?redirect=/otn/login/userLogin";
             request.Method = "post";
             ArrayList list = TrainHttpContext.Send(request);
-            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+            jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             ResponseUamtk package = JsonConvert.DeserializeObject<ResponseUamtk>(jsonResult);
             Log.Write(LogLevel.Info, jsonResult);
-            PostUamauthClient(package.newapptk);
+            return package;
         }
 
 
-
-        public void PostUamauthClient(string tk)
+        /// <summary>
+        /// 获取apptk
+        /// </summary>
+        /// <param name="tk"></param>
+        public ResponseUamauthClient PostUamauthClient(string tk, out string jsonResult)
         {
             RequestPackage request = new RequestPackage();
             request.Params.Add("tk", System.Web.HttpUtility.UrlEncode(tk));
@@ -75,17 +76,13 @@ namespace TrainBLL
             request.Method = "post";
             ArrayList list = TrainHttpContext.Send(request);
 
-            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+            jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             ResponseUamauthClient package = JsonConvert.DeserializeObject<ResponseUamauthClient>(jsonResult);
-            if (package.result_code == 0)
-            {
-                PostConf();
-                PostInitMy12306();
-            }
             Log.Write(LogLevel.Info, jsonResult);
+            return package;
         }
 
-        public void PostConf()
+        public string PostConf()
         {
             RequestPackage request = new RequestPackage();
             request.RequestURL = "/otn/login/conf";
@@ -94,11 +91,11 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             Log.Write(LogLevel.Info, jsonResult);
-
+            return jsonResult;
         }
 
 
-        public void PostInitMy12306()
+        public string PostInitMy12306()
         {
             RequestPackage request = new RequestPackage();
             request.RequestURL = "/otn/index/initMy12306Api";
@@ -107,6 +104,7 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             Log.Write(LogLevel.Info, jsonResult);
+            return jsonResult;
         }
 
         #endregion
@@ -115,8 +113,9 @@ namespace TrainBLL
         /// <summary>
         /// 验证验证码
         /// </summary>
-        public ResponseCaptchaCheck PostCaptchaCheck(string point)
+        public ResponseCaptchaCheck PostCaptchaCheck(string point, out string jsonResult)
         {
+            jsonResult = string.Empty;
             ResponseCaptchaCheck package = null;
             RequestPackage request = new RequestPackage();
             request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
@@ -128,14 +127,9 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             if (list.Count == 2)
             {
-                string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
                 package = JsonConvert.DeserializeObject<ResponseCaptchaCheck>(jsonResult);
-                if (package.status_code == 200)
-                {
-
-                }
                 Log.Write(LogLevel.Info, jsonResult);
-
             }
             return package;
         }
@@ -174,9 +168,9 @@ namespace TrainBLL
         /// <summary>
         /// 获取验证码
         /// </summary>
-        public Tuple<bool, string> GetValidateCode(string url)
+        public Tuple<int, string> GetValidateCode(string url)
         {
-            var status = false;
+            var code = 888;
             string path = string.Empty;
             try
             {
@@ -192,7 +186,7 @@ namespace TrainBLL
                     using (Stream stream = TrainHttpContext.DownloadCode(request))
                     {
                         path = list[2] + ".png";
-                        status = this.SaveValidateCode(stream, Path.Combine(url, path));
+                        if (SaveValidateCode(stream, Path.Combine(url, path))) code = 0;
                     }
                 }
                 else
@@ -204,7 +198,7 @@ namespace TrainBLL
             {
                 Log.Write(LogLevel.Error, ex.Message, ex);
             }
-            return new Tuple<bool, string>(status, path);
+            return new Tuple<int, string>(code, path);
         }
 
         /// <summary>
