@@ -19,6 +19,6 @@ namespace Model
         /// <summary>
         /// json数据
         /// </summary>
-        public string data { get; set; }
+        public object data { get; set; }
     }
 }

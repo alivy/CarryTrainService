@@ -38,8 +38,8 @@ namespace CarryTrainWeb.Controllers
             {
                 code = code.Item1,
                 msg = (code.Item1 == 0) ? "获取图片成功" : "获取图片失败",
-                //真实数据+ http://www.ihavedream.top/
-                url = @"Material/Img/code/"+code.Item2
+                //真实数据+ 
+                url = @"http://www.ihavedream.top/Material/Img/code/" + code.Item2
             };
             return Json(result);
         }
@@ -59,14 +59,10 @@ namespace CarryTrainWeb.Controllers
             {
                 code = check.result_code == 4 ? 0 : check.result_code,
                 msg = check.result_message,
-                data = jsonResult
+                data = check
             };
             return Json(result);
         }
-
-
-
-
 
 
         /// <summary>
@@ -128,16 +124,15 @@ namespace CarryTrainWeb.Controllers
                 var apptk = train.PostUamauthClient(tk.newapptk, out data);
                 result.code = apptk.result_code;
                 result.msg = apptk.result_message;
-                result.data = data;
+                result.data = apptk;
                 if (apptk.result_code == 0)
                 {
-                    var obj = new
+                    result.data = new
                     {
-                        apptkdata = data,
+                        apptkdata = apptk,
                         confdata = train.PostConf(),
                         InitMydata = train.PostInitMy12306()
                     };
-                    result.data = JsonHelper.Serialize(obj);
                 }
             } while (false);
             return Json(result);
@@ -164,6 +159,28 @@ namespace CarryTrainWeb.Controllers
                 msg = "密码不为空";
             }
             return new Tuple<int, string>(status, msg);
+        }
+
+        /// <summary>
+        /// 火车票查询
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PostQuery(string fromStation, string toStation, string date)
+        {
+            //fromStation = "SZQ";
+            //toStation = "WHN";
+            //date = "2019-01-06";
+            string jsonstring = string.Empty;
+            var query = new QueryBll();
+            var ticketQuery = query.TicketQuery(fromStation, toStation, date, out jsonstring);
+            var json = JsonHelper.Deserialize<object>(jsonstring);
+            var result = new ResultModel
+            {
+                code = ticketQuery.status ? 0 : 888,
+                msg = ticketQuery.messages,
+                data = json
+            };
+            return Json(result);
         }
 
 

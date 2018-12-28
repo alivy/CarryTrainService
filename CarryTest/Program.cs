@@ -13,16 +13,9 @@ namespace CarryTest
     {
         static void Main(string[] args)
         {
-            try
-            {
-              
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
             
+            //var json = JsonHelper.Deserialize<object>(jsonstring);
+
         }
     }
 }

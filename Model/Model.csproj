@@ -69,6 +69,7 @@
     <Compile Include="ResponseQuery.cs" />
     <Compile Include="ResponseQueueCount.cs" />
     <Compile Include="ResponseSubmit.cs" />
+    <Compile Include="ResponseTicketQuery.cs" />
     <Compile Include="ResponseUamauthClient.cs" />
     <Compile Include="ResponseUamtk.cs" />
     <Compile Include="Result\ResultModel.cs" />
