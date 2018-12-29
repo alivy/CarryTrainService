@@ -14,6 +14,11 @@ namespace Model
 
         public bool status { get; set; }
 
+        public string c_name { get; set; }
+        
+        public string c_url { get; set; }
+
+
         public TrainQueryData data { get; set; }
     }
 

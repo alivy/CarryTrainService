@@ -48,6 +48,7 @@ namespace Model.Data
             public string to_station_name { get; set; }
             public string start_time { get; set; }
             public string arrive_time { get; set; }
+            public string end_time { get; set; }
             public string day_difference { get; set; }
             public string train_class_name { get; set; }
             /// <summary>
