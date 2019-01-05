@@ -60,6 +60,7 @@
     <Compile Include="Enum\LoginEnum.cs" />
     <Compile Include="RequestPackage.cs" />
     <Compile Include="ResBase.cs" />
+    <Compile Include="ResponseLoginUser.cs" />
     <Compile Include="ResponseBase.cs" />
     <Compile Include="ResponseCaptchaCheck.cs" />
     <Compile Include="ResponseCheckLogin.cs" />

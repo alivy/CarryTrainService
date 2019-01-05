@@ -20,6 +20,13 @@ namespace TrainBLL
     public class LoginBll
     {
         #region 登陆逻辑
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="loginPwd"></param>
+        /// <param name="jsonResult"></param>
+        /// <returns></returns>
         public ResponseLogin PostLogin(string loginName, string loginPwd, out string jsonResult)
         {
             jsonResult = string.Empty;
@@ -44,6 +51,40 @@ namespace TrainBLL
             }
             return package;
         }
+
+
+      
+        /// <summary>
+        /// 检查登陆状态
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="loginPwd"></param>
+        /// <param name="jsonResult"></param>
+        /// <returns></returns>
+        public ResponseLogin PostCheckUser(out string jsonResult)
+        {
+            jsonResult = string.Empty;
+            ResponseLogin package = null;
+            RequestPackage request = new RequestPackage();
+            request.Params.Add("_json_att","");
+            request.RequestURL = "/otn/login/checkUser";
+            request.RefererURL = "/otn/leftTicket/init";
+            request.Method = "post";
+            ArrayList list = TrainHttpContext.Send(request);
+            if (list.Count == 2)
+            {
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
+                Log.Write(LogLevel.Info, jsonResult);
+            }
+            else
+            {
+                Log.Write(LogLevel.Info, list.ToString());
+            }
+            return package;
+        }
+
+
 
         /// <summary>
         /// 获取tk
@@ -82,6 +123,10 @@ namespace TrainBLL
             return package;
         }
 
+        /// <summary>
+        /// 请求conf
+        /// </summary>
+        /// <returns></returns>
         public string PostConf()
         {
             RequestPackage request = new RequestPackage();
@@ -94,7 +139,10 @@ namespace TrainBLL
             return jsonResult;
         }
 
-
+        /// <summary>
+        /// 主页
+        /// </summary>
+        /// <returns></returns>
         public string PostInitMy12306()
         {
             RequestPackage request = new RequestPackage();

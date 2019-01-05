@@ -44,10 +44,10 @@ namespace CarryTrainWeb.Controllers
             return Json(result);
         }
 
-
         /// <summary>
-        /// 验证码验证
+        ///  输入坐标验证码验证
         /// </summary>
+        /// <param name="point">坐标值</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult CheckCode(string point)
@@ -66,7 +66,7 @@ namespace CarryTrainWeb.Controllers
 
 
         /// <summary>
-        /// 验证码验证
+        /// 使用指定位置验证码验证
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -84,7 +84,7 @@ namespace CarryTrainWeb.Controllers
         }
 
         /// <summary>
-        /// 登陆信息
+        /// 用户登陆
         /// </summary>
         /// <param name="user"></param>
         [HttpPost]
