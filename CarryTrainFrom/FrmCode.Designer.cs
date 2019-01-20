@@ -106,7 +106,7 @@
             this.Name = "FrmCode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmCode";
-            this.Load += new System.EventHandler(this.FrmCode_Load);
+        
             ((System.ComponentModel.ISupportInitialize)(this.picCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

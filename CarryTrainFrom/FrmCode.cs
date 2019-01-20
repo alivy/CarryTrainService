@@ -103,67 +103,10 @@ namespace CarryTrainFrom
             }
         }
 
-        /// <summary>
-        /// 加载登录
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="userPwd"></param>
-        /// <returns></returns>
-        private ResultModel Login()
-        {
-            UserInfo userInfo = new UserInfo();
-            userInfo.UserName = ((FrmLogin)Owner).LoginNameText;
-            userInfo.UserPwd = ((FrmLogin)Owner).LoginPwdText;
-            string data = string.Empty;
-            var result = new ResultModel();
-            var train = new LoginBll();
-            do
-            {
-                var login = train.PostLogin(userInfo.UserName, userInfo.UserPwd, out data);
-                if (login.result_code != 0)
-                {
-                    MessageBox.Show(login.result_message);
-                    Log.Write(LogLevel.Info, data);
-                    break;
-                }
-
-                var tk = train.PostUamtk(out data);
-                if (tk.result_code != 0)
-                {
-                    MessageBox.Show(tk.result_message);
-                    Log.Write(LogLevel.Info, data);
-                    break;
-                }
-
-                var apptk = train.PostUamauthClient(tk.newapptk, out data);
-
-                if (apptk.result_code != 0)
-                {
-                    MessageBox.Show(apptk.result_message);
-                    Log.Write(LogLevel.Info, data);
-                    break;
-                }
 
 
-                train.PostConf();
-                train.PostInitMy12306();
 
-                userInfo.RealName = apptk.username;
-                var passenger = new QueryBll().GetPassenger();
-                //获取联系人
-                var passengers = passenger.Data.Normal_Passengers;
-                userInfo.ContactInfo = passengers.Select(x => new ContactInfo
-                {
-                    UserName = x.passenger_name,
-                    CardNo = x.passenger_id_no
-                }).ToList();
-                FrmMain frmMain = new FrmMain();
-                
 
-                //保存用户数据
-            } while (false);
-            return result;
-        }
 
         /// <summary>
         /// 清除picCode画布,并重新加载验证码
@@ -175,9 +118,13 @@ namespace CarryTrainFrom
             {
                 picCode.Controls.Remove(item);
             }
-            points.Clear();
+            if (points != null)
+                points.Clear();
             this.GetValidateCode();
         }
+
+
+
 
         /// <summary>
         /// 提交验证码
@@ -196,7 +143,8 @@ namespace CarryTrainFrom
             var check = train.PostCaptchaCheck(CodePoint(), out jsonResult);
             if (check.result_code == 4)
             {
-                var result = this.Login();
+                this.Close();
+                this.DialogResult = DialogResult.OK;
             }
             else
             {
@@ -205,6 +153,9 @@ namespace CarryTrainFrom
             }
 
         }
+
+      
+
 
         /// <summary>
         /// 获取选中坐标
@@ -261,10 +212,7 @@ namespace CarryTrainFrom
             }
         }
 
-        private void FrmCode_Load(object sender, EventArgs e)
-        {
-
-        }
+      
         /// <summary>
         /// 切换验证码
         /// </summary>

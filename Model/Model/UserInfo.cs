@@ -26,9 +26,20 @@ namespace Model.Model
         public string RealName { get; set; }
 
         /// <summary>
+        /// 用户当前状态
+        /// 0 未登录 1登录
+        /// </summary>
+        public int State { get; set; }
+
+        /// <summary>
         ///  登录用户联系人信息
         /// </summary>
         public List<ContactInfo> ContactInfo { get; set; }
+
+        /// <summary>
+        /// 联系人数量
+        /// </summary>
+        public int ContactNum { get { return ContactInfo.Count; } }
     }
 
     /// <summary>
@@ -39,7 +50,7 @@ namespace Model.Model
         /// <summary>
         /// 用户姓名
         /// </summary>
-        public string UserName { get; set; }
+        public string ContactName { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>

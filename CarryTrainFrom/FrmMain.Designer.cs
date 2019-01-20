@@ -32,13 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.UserAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContactNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataUserInfoView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataContactInfoView = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.btnDelContact = new System.Windows.Forms.Button();
@@ -55,64 +51,36 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataUserInfoView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UserAccount,
+            this.dataUserInfoView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataUserInfoView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.UserName,
             this.UserPwd,
             this.State,
             this.ContactNum});
-            this.dataGridView1.Location = new System.Drawing.Point(8, 50);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(365, 268);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // UserAccount
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.UserAccount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.UserAccount.HeaderText = "账号";
-            this.UserAccount.Name = "UserAccount";
-            this.UserAccount.Width = 95;
-            // 
-            // UserPwd
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.UserPwd.DefaultCellStyle = dataGridViewCellStyle6;
-            this.UserPwd.HeaderText = "密码";
-            this.UserPwd.Name = "UserPwd";
-            this.UserPwd.Width = 95;
-            // 
-            // State
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.State.DefaultCellStyle = dataGridViewCellStyle7;
-            this.State.HeaderText = "状态";
-            this.State.Name = "State";
-            this.State.Width = 60;
-            // 
-            // ContactNum
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ContactNum.DefaultCellStyle = dataGridViewCellStyle8;
-            this.ContactNum.HeaderText = "联系人数量";
-            this.ContactNum.Name = "ContactNum";
-            this.ContactNum.Width = 90;
+            this.dataUserInfoView.Location = new System.Drawing.Point(8, 50);
+            this.dataUserInfoView.Name = "dataUserInfoView";
+            this.dataUserInfoView.RowTemplate.Height = 23;
+            this.dataUserInfoView.Size = new System.Drawing.Size(365, 268);
+            this.dataUserInfoView.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView2);
+            this.groupBox1.Controls.Add(this.dataContactInfoView);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnDelContact);
@@ -124,7 +92,7 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.btnAddUser);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataUserInfoView);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(381, 705);
@@ -132,17 +100,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "账号管理";
             // 
-            // dataGridView2
+            // dataContactInfoView
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UserName,
+            this.dataContactInfoView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataContactInfoView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ContactName,
             this.CardNo});
-            this.dataGridView2.Location = new System.Drawing.Point(10, 425);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(365, 263);
-            this.dataGridView2.TabIndex = 12;
+            this.dataContactInfoView.Location = new System.Drawing.Point(10, 425);
+            this.dataContactInfoView.Name = "dataContactInfoView";
+            this.dataContactInfoView.RowTemplate.Height = 23;
+            this.dataContactInfoView.Size = new System.Drawing.Size(365, 263);
+            this.dataContactInfoView.TabIndex = 12;
             // 
             // label3
             // 
@@ -295,15 +263,53 @@
             this.tabPage4.Text = "订单页";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // UserName
+            // ContactName
             // 
-            this.UserName.HeaderText = "用户名";
-            this.UserName.Name = "UserName";
+            this.ContactName.DataPropertyName = "ContactName";
+            this.ContactName.HeaderText = "用户名";
+            this.ContactName.Name = "ContactName";
             // 
             // CardNo
             // 
+            this.CardNo.DataPropertyName = "CardNo";
             this.CardNo.HeaderText = "身份证账号";
             this.CardNo.Name = "CardNo";
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.UserName.DefaultCellStyle = dataGridViewCellStyle5;
+            this.UserName.HeaderText = "账号";
+            this.UserName.Name = "UserName";
+            this.UserName.Width = 95;
+            // 
+            // UserPwd
+            // 
+            this.UserPwd.DataPropertyName = "UserPwd";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.UserPwd.DefaultCellStyle = dataGridViewCellStyle6;
+            this.UserPwd.HeaderText = "密码";
+            this.UserPwd.Name = "UserPwd";
+            this.UserPwd.Width = 95;
+            // 
+            // State
+            // 
+            this.State.DataPropertyName = "State";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.State.DefaultCellStyle = dataGridViewCellStyle7;
+            this.State.HeaderText = "状态";
+            this.State.Name = "State";
+            this.State.Width = 60;
+            // 
+            // ContactNum
+            // 
+            this.ContactNum.DataPropertyName = "ContactNum";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ContactNum.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ContactNum.HeaderText = "联系人数量";
+            this.ContactNum.Name = "ContactNum";
+            this.ContactNum.Width = 90;
             // 
             // FrmMain
             // 
@@ -314,10 +320,10 @@
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "小严购票(首页)";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -326,9 +332,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataUserInfoView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataContactInfoView;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btnDelContact;
@@ -345,11 +351,11 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserAccount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserPwd;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContactNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactName;
         private System.Windows.Forms.DataGridViewTextBoxColumn CardNo;
     }
 }
