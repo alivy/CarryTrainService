@@ -31,62 +31,96 @@ namespace Model.Data
         public class DetailData
         {
             /// <summary>
+            /// 车次编号id
+            /// </summary>
+            public string trainId { get; set; }
+
+            /// <summary>
+            /// 操作描述
+            /// 如 ：预定
+            /// </summary>
+            public string operat_remark { get; set; }
+
+            /// <summary>
+            /// 完整车次编号
+            /// </summary>
+            public string complete_train_no { get; set; }
+
+            /// <summary>
             /// 车次编号
             /// </summary>
             public string train_no { get; set; }
             /// <summary>
-            /// 车次
+            /// 车次起始站点编号
             /// </summary>
-            public string station_train_code { get; set; }
             public string start_station_telecode { get; set; }
             public string start_station_name { get; set; }
+            /// <summary>
+            /// 车次终点站点编号
+            /// </summary>
             public string end_station_telecode { get; set; }
             public string end_station_name { get; set; }
-            public string from_station_telecode { get; set; }
-            public string from_station_name { get; set; }
-            public string to_station_telecode { get; set; }
-            public string to_station_name { get; set; }
-            public string start_time { get; set; }
-            public string arrive_time { get; set; }
-            public string end_time { get; set; }
-            public string day_difference { get; set; }
-            public string train_class_name { get; set; }
             /// <summary>
-            /// 历时
+            /// 购票出发站编号
+            /// </summary>
+            public string from_station_telecode { get; set; }
+            /// <summary>
+            /// 购票出发站点名称
+            /// </summary>
+            public string from_station_name { get; set; }
+            /// <summary>
+            ///  购票目的站点编号
+            /// </summary>
+            public string to_station_telecode { get; set; }
+            /// <summary>
+            /// 购票目的站点名称
+            /// </summary>
+            public string to_station_name { get; set; }
+            /// <summary>
+            /// 出发时间
+            /// </summary>
+            public string start_time { get; set; }
+            /// <summary>
+            /// 到达时间
+            /// </summary>
+            public string arrive_time { get; set; }
+            /// <summary>
+            /// 经历时间
             /// </summary>
             public string lishi { get; set; }
-            public string canWebBuy { get; set; }
-            public string lishiValue { get; set; }
-            public string yp_info { get; set; }
-            public string control_train_day { get; set; }
-            public string start_train_date { get; set; }
+            /// <summary>
+            /// 是否跨天
+            /// "Y" 是 "N" 否 
+            /// </summary>
+            public string cross_days { get; set; }
+
+            /// <summary>
+            /// 跨天描述
+            /// 其实我也不知道干啥的
+            /// </summary>
+            public string cross_days_reamrk { get; set; }
+
+            /// <summary>
+            /// 出发日期
+            /// </summary>
+            public string departure_date { get; set; }
+
             public DateTime StartTrainDate
             {
                 get
                 {
                     DateTime train_date = DateTime.Now;
-                    if (!string.IsNullOrEmpty(this.start_train_date) && this.start_train_date.Length == 8)
+                    if (!string.IsNullOrEmpty(this.start_time) && this.start_time.Length == 8)
                     {
-                        int year = int.Parse(this.start_train_date.Substring(0, 4));
-                        int month = int.Parse(this.start_train_date.Substring(4, 2));
-                        int day = int.Parse(this.start_train_date.Substring(6, 2));
+                        int year = int.Parse(this.start_time.Substring(0, 4));
+                        int month = int.Parse(this.start_time.Substring(4, 2));
+                        int day = int.Parse(this.start_time.Substring(6, 2));
                         train_date = new DateTime(year, month, day);
                     }
                     return train_date;
                 }
             }
-            public string seat_feature { get; set; }
-            public string yp_ex { get; set; }
-            public string train_seat_feature { get; set; }
-            public string seat_types { get; set; }
-            public string location_code { get; set; }
-            public string from_station_no { get; set; }
-            public string to_station_no { get; set; }
-            public int control_day { get; set; }
-            public string sale_time { get; set; }
-            public string is_support_card { get; set; }
-
-            public string gg_num { get; set; }
+         
             /// <summary>
             /// 高级软卧
             /// </summary>
@@ -111,6 +145,9 @@ namespace Model.Data
             /// 无座
             /// </summary>
             public string wz_num { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public string yb_num { get; set; }
             /// <summary>
             /// 硬卧

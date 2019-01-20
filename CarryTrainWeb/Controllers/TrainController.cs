@@ -33,7 +33,9 @@ namespace CarryTrainWeb.Controllers
             LoginBll train = new LoginBll();
             string url = Server.MapPath(@"..\Material\Img\code");
             Log.Write(LogLevel.Info, "文件保存路径" + url);
-            var code = train.GetValidateCode(url);
+            var code = train.GetValidateCode();
+            if (code.Item1 == 0)
+                train.SaveValidateCode(code.Item3, Path.Combine(url, code.Item2));
             var result = new
             {
                 code = code.Item1,

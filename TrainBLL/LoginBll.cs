@@ -52,7 +52,7 @@ namespace TrainBLL
             return package;
         }
 
-
+        
       
         /// <summary>
         /// 检查登陆状态
@@ -216,10 +216,11 @@ namespace TrainBLL
         /// <summary>
         /// 获取验证码
         /// </summary>
-        public Tuple<int, string> GetValidateCode(string url)
+        public Tuple<int,string, Stream> GetValidateCode()
         {
             var code = 888;
-            string path = string.Empty;
+            string imgName = string.Empty;
+            Stream stream = null;
             try
             {
                 RequestPackage request = new RequestPackage("/otn/login/init");
@@ -231,11 +232,8 @@ namespace TrainBLL
                     request.Params.Add("module", "login");
                     request.Params.Add("rand", "sjrand");
                     request.Params.Add("0.21660476430599007", "");
-                    using (Stream stream = TrainHttpContext.DownloadCode(request))
-                    {
-                        path = list[2] + ".png";
-                        if (SaveValidateCode(stream, Path.Combine(url, path))) code = 0;
-                    }
+                    imgName = list[2] + ".png";
+                    stream = TrainHttpContext.DownloadCode(request);  
                 }
                 else
                 {
@@ -246,7 +244,7 @@ namespace TrainBLL
             {
                 Log.Write(LogLevel.Error, ex.Message, ex);
             }
-            return new Tuple<int, string>(code, path);
+            return new Tuple<int, string, Stream>(code, imgName,stream);
         }
 
         /// <summary>

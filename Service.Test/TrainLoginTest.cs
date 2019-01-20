@@ -35,8 +35,8 @@ namespace Service.Test
         {
             string url = @"C:\Train\Code";
             var train = new LoginBll();
-            var code = train.GetValidateCode(url);
-            Assert.AreEqual(true, code.Item1);
+            //var code = train.GetValidateCode(url);
+            //Assert.AreEqual(true, code.Item1);
         }
 
         /// <summary>

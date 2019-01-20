@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppResource.cs" />
     <Compile Include="Help\TrainHttpContext.cs" />
     <Compile Include="Help\ConstString.cs" />
     <Compile Include="Help\DESEncrypt.cs" />
@@ -74,12 +76,18 @@
     <Compile Include="Log4Net\Log.cs" />
     <Compile Include="Log4Net\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Soce\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\log.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Config\logger.config" />
+    <None Include="jsons\allCitys.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +95,129 @@
       <Project>{1dfadd96-a37d-4776-ae24-b875f7037bf9}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Soce\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\勾选-圆形实色.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\framemod.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_date_notice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sys_button_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sys_button_max.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sys_button_min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sys_button_restore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolbar_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logoico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.timer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.train.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\未标题-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loading.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\block\close_hover.png" />
+    <Content Include="Images\block\close_normal.png" />
+    <Content Include="Images\framemod.png" />
+    <Content Include="Images\icon_date_notice.png" />
+    <EmbeddedResource Include="Images\Loading\1.png" />
+    <EmbeddedResource Include="Images\Loading\2.png" />
+    <EmbeddedResource Include="Images\Loading\3.png" />
+    <EmbeddedResource Include="Images\Loading\4.png" />
+    <EmbeddedResource Include="Images\Loading\5.png" />
+    <EmbeddedResource Include="Images\Loading\6.png" />
+    <EmbeddedResource Include="Images\Loading\7.png" />
+    <EmbeddedResource Include="Images\Loading\8.png" />
+    <EmbeddedResource Include="Images\Loading\error.png" />
+    <Content Include="Images\location.png" />
+    <Content Include="Images\logo\logo.png" />
+    <Content Include="Images\logo\logoico.ico" />
+    <Content Include="Images\menu.png" />
+    <Content Include="Images\sys_button_close.png" />
+    <Content Include="Images\sys_button_max.png" />
+    <Content Include="Images\sys_button_min.png" />
+    <EmbeddedResource Include="Images\sys_button_restore.png" />
+    <Content Include="Images\tab\appbar.timer.png" />
+    <Content Include="Images\tab\appbar.train.png" />
+    <Content Include="Images\tab\appbar.user.png" />
+    <Content Include="Images\tab\未标题-1.png" />
+    <Content Include="Images\toolbar_hover.png" />
+    <Content Include="jsons\citys.txt" />
+    <Content Include="jsons\hotCitys.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
