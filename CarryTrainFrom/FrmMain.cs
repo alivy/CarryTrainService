@@ -13,7 +13,7 @@ namespace CarryTrainFrom
 {
     public partial class FrmMain : Form
     {
-        private List<UserInfo> userInfos ;
+        private List<UserInfo> userInfos;
         public FrmMain()
         {
             InitializeComponent();
@@ -52,11 +52,12 @@ namespace CarryTrainFrom
         {
             dataUserInfoView.AutoGenerateColumns = false;
             dataUserInfoView.DataSource = users;
-            //dataUserInfoView.Refresh();
+            dataUserInfoView.Refresh();
             dataContactInfoView.AutoGenerateColumns = false;
             dataContactInfoView.DataSource = contacts;
-            //dataContactInfoView.Refresh();
+            dataContactInfoView.Refresh();
         }
+
 
 
 
@@ -67,7 +68,7 @@ namespace CarryTrainFrom
             {
                 if ((result = frmLogin.ShowDialog()) == DialogResult.OK)
                 {
-
+                    AddUserView(frmLogin.user);   
                 }
             }
             return result;

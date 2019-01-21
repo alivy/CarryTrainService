@@ -20,12 +20,12 @@ namespace CarryTrainFrom
         public string LoginNameText { get { return txtLoginName.Text; } }
         public string LoginPwdText { get { return txtLoginPwd.Text; } }
 
-        public List<UserInfo> userInfos;
+        public UserInfo user;
         #endregion
         public FrmLogin()
         {
             InitializeComponent();
-            userInfos = new List<UserInfo>();
+            user = new UserInfo();
         }
         /// <summary>
         /// 点击登录
@@ -97,9 +97,9 @@ namespace CarryTrainFrom
         /// <param name="userName"></param>
         /// <param name="userPwd"></param>
         /// <returns></returns>
-        private ResultModel Login(UserInfo userInfo)
+        private void Login(UserInfo userInfo)
         {
-         ;
+            ;
             string data = string.Empty;
             var result = new ResultModel();
             var train = new LoginBll();
@@ -129,8 +129,6 @@ namespace CarryTrainFrom
                     Log.Write(LogLevel.Info, data);
                     break;
                 }
-
-
                 train.PostConf();
                 train.PostInitMy12306();
 
@@ -143,23 +141,10 @@ namespace CarryTrainFrom
                     ContactName = x.passenger_name,
                     CardNo = x.passenger_id_no
                 }).ToList();
-
-                LoadFrmMainView(userInfo);
-
+                userInfo.State = 1;
+                user = userInfo;
+                this.DialogResult = DialogResult.OK;
             } while (false);
-
-            return result;
-        }
-
-        /// <summary>
-        /// 加载主窗体视图数据
-        /// </summary>
-        /// <param name="userInfo"></param>
-        public void LoadFrmMainView(UserInfo userInfo)
-        {
-            FrmMain frmMain = new FrmMain();
-            userInfo.State = 1;
-            frmMain.AddUserView(userInfo);
         }
     }
 }

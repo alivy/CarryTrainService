@@ -53,6 +53,12 @@
     <Compile Include="FrmCode.Designer.cs">
       <DependentUpon>FrmCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCreatTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCreatTask.Designer.cs">
+      <DependentUpon>FrmCreatTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <EmbeddedResource Include="FrmCode.resx">
       <DependentUpon>FrmCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCreatTask.resx">
+      <DependentUpon>FrmCreatTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
