@@ -164,5 +164,9 @@
   <ItemGroup>
     <None Include="Resources\7.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XmlSoure\UserInfo.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

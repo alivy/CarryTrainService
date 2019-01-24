@@ -146,5 +146,10 @@ namespace CarryTrainFrom
                 this.DialogResult = DialogResult.OK;
             } while (false);
         }
+
+        private void txtLoginName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

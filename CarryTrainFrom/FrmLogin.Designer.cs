@@ -57,7 +57,7 @@
             this.txtLoginPwd.PasswordChar = '*';
             this.txtLoginPwd.Size = new System.Drawing.Size(219, 26);
             this.txtLoginPwd.TabIndex = 9;
-            this.txtLoginPwd.Text = "yanhaomiao123";
+            this.txtLoginPwd.Text = "Yan0920..";
             // 
             // txtLoginName
             // 
@@ -67,7 +67,8 @@
             this.txtLoginName.Name = "txtLoginName";
             this.txtLoginName.Size = new System.Drawing.Size(219, 26);
             this.txtLoginName.TabIndex = 8;
-            this.txtLoginName.Text = "17620372030";
+            this.txtLoginName.Text = "17683988920";
+            this.txtLoginName.TextChanged += new System.EventHandler(this.txtLoginName_TextChanged);
             // 
             // lblLoginPwd
             // 

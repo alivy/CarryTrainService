@@ -15,6 +15,7 @@ namespace TrainBLL
 {
     public class QueryBll
     {
+        public static string queryInterface = "/otn/leftTicket/queryA";
         /// <summary>
         /// 火车票查询
         /// </summary>
@@ -29,7 +30,7 @@ namespace TrainBLL
             RequestPackage request = new RequestPackage();
             request.Method = EHttpMethod.Get.ToString();
             request.RefererURL = "/otn/leftTicket/init";
-            request.RequestURL = "/otn/leftTicket/queryA";
+            request.RequestURL = queryInterface;
             request.Params.Add("leftTicketDTO.train_date", date);
             request.Params.Add("leftTicketDTO.from_station", fromStation);
             request.Params.Add("leftTicketDTO.to_station", toStation);
@@ -41,11 +42,11 @@ namespace TrainBLL
             if (reulst.status)
             {
                 data = reulst.data.result;
-
             }
             else if (reulst.messages != null && reulst.messages.Length > 0)
             {
-                request.RequestURL = reulst.c_url;
+                queryInterface = reulst.c_url;
+                request.RequestURL = queryInterface;
                 list = TrainHttpContext.Send(request);
                 if (list.Count == 2)
                 {
@@ -53,38 +54,7 @@ namespace TrainBLL
                 }
                 Log.Write(LogLevel.Info, reulst.messages);
             }
-            foreach (var item in data)
-            {
-                var r_list = item.Split(new char[] { '|' });
-                DetailData detail = new DetailData
-                {
-
-                    trainId = r_list[0],
-                    operat_remark = r_list[1],
-                    train_no = r_list[2],
-                    complete_train_no = r_list[3],
-                    start_station_telecode = r_list[4],
-                    end_station_telecode = r_list[5],
-                    from_station_telecode = r_list[6],
-                    to_station_telecode = r_list[7],
-                    start_time = r_list[8],
-                    arrive_time = r_list[9],
-                    lishi = r_list[10],
-                    cross_days = r_list[11],
-                    cross_days_reamrk = r_list[12],
-                    departure_date = r_list[13],
-
-                    gr_num = r_list[21],
-                    qt_num = r_list[22],
-                    rw_num = r_list[23],
-                    rz_num = r_list[24],
-                    wz_num = r_list[26],
-                    yw_num = r_list[28],
-                    yz_num = r_list[29],
-
-
-                };
-            }
+         
             return reulst;
         }
 
