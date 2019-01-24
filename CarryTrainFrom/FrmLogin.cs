@@ -34,8 +34,10 @@ namespace CarryTrainFrom
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string userName = txtLoginName.Text;
-            string userPwd = txtLoginPwd.Text;
+            //string userName = txtLoginName.Text;
+            //string userPwd = txtLoginPwd.Text;
+            string userName = "17620372030";
+            string userPwd = "yanhaomiao123";
             var train = new LoginBll();
 
             var check = UserCheck(userName, userPwd);

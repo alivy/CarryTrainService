@@ -55,14 +55,15 @@ namespace CarryTrainFrom
 
             var departure = departureStation.Text;
             var arrivals = arrivalsStation.Text;
-            var date = departureDate.Text;
+            var date =  departureDate.Text;
 
             var departureMsg = responses.FirstOrDefault(x => x.StationName == departure);
-            var arrivalsMsg = responses.FirstOrDefault(x => x.StationName == departure);
+            var arrivalsMsg = responses.FirstOrDefault(x => x.StationName == arrivals);
             if (departureMsg == null || arrivalsMsg == null)
                 MessageBox.Show("粗发站或到达站输入错误");
             var ticketQuery = queryBll.TicketQuery(departureMsg.StationShort, arrivalsMsg.StationShort, date, out string jsonstring);
             var ticketList = TicketQueryAction(ticketQuery);
+            TicketQueryFilter(ticketList, departureMsg);
             dataTrain.DataSource = ticketList;
         }
 
@@ -118,6 +119,7 @@ namespace CarryTrainFrom
                 };
                 details.Add(detail);
             }
+
             return details;
         }
 

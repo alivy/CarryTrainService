@@ -15,7 +15,7 @@ namespace TrainBLL
 {
     public class QueryBll
     {
-        public static string queryInterface = "/otn/leftTicket/queryA";
+        public static string queryInterface = "/otn/leftTicket/queryZ";
         /// <summary>
         /// 火车票查询
         /// </summary>
@@ -30,7 +30,7 @@ namespace TrainBLL
             RequestPackage request = new RequestPackage();
             request.Method = EHttpMethod.Get.ToString();
             request.RefererURL = "/otn/leftTicket/init";
-            request.RequestURL = queryInterface;
+            request.RequestURL = "/otn/leftTicket/queryZ";
             request.Params.Add("leftTicketDTO.train_date", date);
             request.Params.Add("leftTicketDTO.from_station", fromStation);
             request.Params.Add("leftTicketDTO.to_station", toStation);
@@ -54,7 +54,7 @@ namespace TrainBLL
                 }
                 Log.Write(LogLevel.Info, reulst.messages);
             }
-         
+
             return reulst;
         }
 

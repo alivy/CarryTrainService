@@ -34,6 +34,7 @@
             "测试2"}, -1);
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
@@ -52,6 +53,9 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dataPassenger = new System.Windows.Forms.DataGridView();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.departureDate = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
@@ -104,10 +108,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button4 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -134,6 +134,19 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选取乘车人信息";
+            // 
+            // listView1
+            // 
+            listViewItem3.Checked = true;
+            listViewItem3.StateImageIndex = 1;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.listView1.Location = new System.Drawing.Point(424, 71);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(121, 97);
+            this.listView1.TabIndex = 10;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // panel1
             // 
@@ -324,6 +337,24 @@
             this.dataPassenger.Size = new System.Drawing.Size(204, 234);
             this.dataPassenger.TabIndex = 0;
             // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "联系人";
+            this.Column18.Name = "Column18";
+            this.Column18.Width = 80;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "身份证";
+            this.Column19.Name = "Column19";
+            this.Column19.Visible = false;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "状态";
+            this.Column20.Name = "Column20";
+            this.Column20.Width = 80;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.departureDate);
@@ -356,6 +387,8 @@
             // 
             // departureDate
             // 
+            this.departureDate.CustomFormat = "yyyy-MM-dd";
+            this.departureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.departureDate.Location = new System.Drawing.Point(511, 23);
             this.departureDate.Name = "departureDate";
             this.departureDate.Size = new System.Drawing.Size(135, 21);
@@ -791,37 +824,6 @@
             this.button4.TabIndex = 0;
             this.button4.Text = "建立任务";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.listView1.Location = new System.Drawing.Point(424, 71);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "联系人";
-            this.Column18.Name = "Column18";
-            this.Column18.Width = 80;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "身份证";
-            this.Column19.Name = "Column19";
-            this.Column19.Visible = false;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "状态";
-            this.Column20.Name = "Column20";
-            this.Column20.Width = 80;
             // 
             // FrmCreatTask
             // 
