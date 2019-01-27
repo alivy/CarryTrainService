@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlivyCalculator", "AlivyCalculator\AlivyCalculator.csproj", "{C33A019E-7291-499D-B844-8BA18F3836A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteHelp", "LiteHelp\LiteHelp.csproj", "{380E6EF9-7D3F-4F46-B672-9CFE203588EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{C33A019E-7291-499D-B844-8BA18F3836A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33A019E-7291-499D-B844-8BA18F3836A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33A019E-7291-499D-B844-8BA18F3836A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380E6EF9-7D3F-4F46-B672-9CFE203588EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380E6EF9-7D3F-4F46-B672-9CFE203588EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380E6EF9-7D3F-4F46-B672-9CFE203588EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380E6EF9-7D3F-4F46-B672-9CFE203588EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{5E47C009-2F6D-45EC-B840-9675B52545EE} = {132CAAF1-619A-4C79-83FC-63671494E887}
 		{C29F0F83-9482-4DD7-BFAA-0CBFE074468D} = {132CAAF1-619A-4C79-83FC-63671494E887}
 		{C33A019E-7291-499D-B844-8BA18F3836A3} = {C27CED87-5ED4-4DE6-914E-EDFA17D2E455}
+		{380E6EF9-7D3F-4F46-B672-9CFE203588EF} = {C27CED87-5ED4-4DE6-914E-EDFA17D2E455}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE174BA0-4749-48DF-BAE1-6AE2334A9B6E}

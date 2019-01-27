@@ -33,8 +33,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataUserInfoView = new System.Windows.Forms.DataGridView();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataContactInfoView = new System.Windows.Forms.DataGridView();
+            this.ContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.btnDelContact = new System.Windows.Forms.Button();
@@ -48,31 +54,25 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDelTask = new System.Windows.Forms.Button();
+            this.btnStopTask = new System.Windows.Forms.Button();
+            this.btnStartTask = new System.Windows.Forms.Button();
+            this.btnAddTask = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.ContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContactNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataUserInfoView
@@ -88,6 +88,42 @@
             this.dataUserInfoView.RowTemplate.Height = 23;
             this.dataUserInfoView.Size = new System.Drawing.Size(365, 268);
             this.dataUserInfoView.TabIndex = 0;
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.UserName.DefaultCellStyle = dataGridViewCellStyle1;
+            this.UserName.HeaderText = "账号";
+            this.UserName.Name = "UserName";
+            this.UserName.Width = 85;
+            // 
+            // UserPwd
+            // 
+            this.UserPwd.DataPropertyName = "UserPwd";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.UserPwd.DefaultCellStyle = dataGridViewCellStyle2;
+            this.UserPwd.HeaderText = "密码";
+            this.UserPwd.Name = "UserPwd";
+            this.UserPwd.Width = 85;
+            // 
+            // State
+            // 
+            this.State.DataPropertyName = "State";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.State.DefaultCellStyle = dataGridViewCellStyle3;
+            this.State.HeaderText = "状态";
+            this.State.Name = "State";
+            this.State.Width = 60;
+            // 
+            // ContactNum
+            // 
+            this.ContactNum.DataPropertyName = "ContactNum";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ContactNum.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ContactNum.HeaderText = "联系人数量";
+            this.ContactNum.Name = "ContactNum";
+            this.ContactNum.Width = 90;
             // 
             // groupBox1
             // 
@@ -122,6 +158,20 @@
             this.dataContactInfoView.RowTemplate.Height = 23;
             this.dataContactInfoView.Size = new System.Drawing.Size(365, 263);
             this.dataContactInfoView.TabIndex = 12;
+            // 
+            // ContactName
+            // 
+            this.ContactName.DataPropertyName = "ContactName";
+            this.ContactName.HeaderText = "用户名";
+            this.ContactName.Name = "ContactName";
+            this.ContactName.Width = 121;
+            // 
+            // CardNo
+            // 
+            this.CardNo.DataPropertyName = "CardNo";
+            this.CardNo.HeaderText = "身份证账号";
+            this.CardNo.Name = "CardNo";
+            this.CardNo.Width = 200;
             // 
             // label3
             // 
@@ -248,6 +298,83 @@
             this.tabPage1.Text = "任务管理";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Location = new System.Drawing.Point(393, 388);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(992, 323);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "日志输出";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(6, 43);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(980, 263);
+            this.textBox2.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnDelTask);
+            this.groupBox2.Controls.Add(this.btnStopTask);
+            this.groupBox2.Controls.Add(this.btnStartTask);
+            this.groupBox2.Controls.Add(this.btnAddTask);
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Location = new System.Drawing.Point(393, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(992, 369);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "任务管理";
+            // 
+            // btnDelTask
+            // 
+            this.btnDelTask.Location = new System.Drawing.Point(445, 20);
+            this.btnDelTask.Name = "btnDelTask";
+            this.btnDelTask.Size = new System.Drawing.Size(129, 39);
+            this.btnDelTask.TabIndex = 4;
+            this.btnDelTask.Text = "删除任务";
+            this.btnDelTask.UseVisualStyleBackColor = true;
+            // 
+            // btnStopTask
+            // 
+            this.btnStopTask.Location = new System.Drawing.Point(298, 20);
+            this.btnStopTask.Name = "btnStopTask";
+            this.btnStopTask.Size = new System.Drawing.Size(129, 39);
+            this.btnStopTask.TabIndex = 3;
+            this.btnStopTask.Text = "停止任务";
+            this.btnStopTask.UseVisualStyleBackColor = true;
+            // 
+            // btnStartTask
+            // 
+            this.btnStartTask.Location = new System.Drawing.Point(151, 20);
+            this.btnStartTask.Name = "btnStartTask";
+            this.btnStartTask.Size = new System.Drawing.Size(129, 39);
+            this.btnStartTask.TabIndex = 2;
+            this.btnStartTask.Text = "启动任务";
+            this.btnStartTask.UseVisualStyleBackColor = true;
+            // 
+            // btnAddTask
+            // 
+            this.btnAddTask.Location = new System.Drawing.Point(6, 20);
+            this.btnAddTask.Name = "btnAddTask";
+            this.btnAddTask.Size = new System.Drawing.Size(129, 39);
+            this.btnAddTask.TabIndex = 1;
+            this.btnAddTask.Text = "添加任务";
+            this.btnAddTask.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 68);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(980, 295);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -276,133 +403,6 @@
             this.tabPage4.Text = "订单页";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // ContactName
-            // 
-            this.ContactName.DataPropertyName = "ContactName";
-            this.ContactName.HeaderText = "用户名";
-            this.ContactName.Name = "ContactName";
-            this.ContactName.Width = 121;
-            // 
-            // CardNo
-            // 
-            this.CardNo.DataPropertyName = "CardNo";
-            this.CardNo.HeaderText = "身份证账号";
-            this.CardNo.Name = "CardNo";
-            this.CardNo.Width = 200;
-            // 
-            // UserName
-            // 
-            this.UserName.DataPropertyName = "UserName";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.UserName.DefaultCellStyle = dataGridViewCellStyle1;
-            this.UserName.HeaderText = "账号";
-            this.UserName.Name = "UserName";
-            this.UserName.Width = 85;
-            // 
-            // UserPwd
-            // 
-            this.UserPwd.DataPropertyName = "UserPwd";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.UserPwd.DefaultCellStyle = dataGridViewCellStyle2;
-            this.UserPwd.HeaderText = "密码";
-            this.UserPwd.Name = "UserPwd";
-            this.UserPwd.Width = 85;
-            // 
-            // State
-            // 
-            this.State.DataPropertyName = "State";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.State.DefaultCellStyle = dataGridViewCellStyle3;
-            this.State.HeaderText = "状态";
-            this.State.Name = "State";
-            this.State.Width = 60;
-            // 
-            // ContactNum
-            // 
-            this.ContactNum.DataPropertyName = "ContactNum";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ContactNum.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ContactNum.HeaderText = "联系人数量";
-            this.ContactNum.Name = "ContactNum";
-            this.ContactNum.Width = 90;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(393, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(992, 369);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "任务管理";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 68);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(980, 295);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 39);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "添加任务";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(151, 20);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(129, 39);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "启动任务";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(298, 20);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 39);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "停止任务";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(445, 20);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(129, 39);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "删除任务";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Location = new System.Drawing.Point(393, 388);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(992, 323);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "日志输出";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(6, 43);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(980, 263);
-            this.textBox2.TabIndex = 0;
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -412,16 +412,17 @@
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "小严购票(首页)";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -456,10 +457,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDelTask;
+        private System.Windows.Forms.Button btnStopTask;
+        private System.Windows.Forms.Button btnStartTask;
+        private System.Windows.Forms.Button btnAddTask;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

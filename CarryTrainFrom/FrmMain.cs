@@ -8,16 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrainBLL;
 
 namespace CarryTrainFrom
 {
     public partial class FrmMain : Form
     {
         private List<UserInfo> userInfos;
+        public UserInfoBll userInfoBll;
         public FrmMain()
         {
-            InitializeComponent();
+            userInfoBll = new UserInfoBll();
             userInfos = new List<UserInfo>();
+            InitializeComponent();
+
         }
         /// <summary>
         /// 添加账号到缓存
@@ -40,6 +44,12 @@ namespace CarryTrainFrom
             userInfos.Add(user);
             var userInfo = userInfos.FirstOrDefault(x => x.State == 1);
             var contact = userInfo == null ? new List<ContactInfo>() : userInfo.ContactInfo;
+            var excutUser = userInfoBll.UserInfoInsert(new DBUserInfo
+            {
+                userName = userInfo.UserName,
+                userPwd = userInfo.UserPwd,
+                Starts = userInfo.State
+            });
             ShowUserDataView(userInfos, contact);
         }
 
@@ -68,10 +78,15 @@ namespace CarryTrainFrom
             {
                 if ((result = frmLogin.ShowDialog()) == DialogResult.OK)
                 {
-                    AddUserView(frmLogin.user);   
+                    AddUserView(frmLogin.user);
                 }
             }
             return result;
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

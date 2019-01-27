@@ -82,6 +82,29 @@ namespace Common
             }
             return stream;
         }
+
+
+        public static string FilePath(string name)
+        {
+            string path = null;
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    if (name[0] != '.')
+                        sb.Append(AppResource.CurrentAssemblyName + "." + name);
+                    else
+                        sb.Append(AppResource.CurrentAssemblyName + name);
+                    path = sb.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return path;
+        }
         #endregion
     }
 }
