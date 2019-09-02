@@ -25,36 +25,46 @@ namespace TrainBLL
         /// <returns></returns>
         public ResponseTicketQuery TicketQuery(string fromStation, string toStation, string date, out string jsonString)
         {
-            jsonString = string.Empty;
             ResponseTicketQuery reulst = null;
-            RequestPackage request = new RequestPackage();
-            request.Method = EHttpMethod.Get.ToString();
-            request.RefererURL = "/otn/leftTicket/init";
-            request.RequestURL = "/otn/leftTicket/queryZ";
-            request.Params.Add("leftTicketDTO.train_date", date);
-            request.Params.Add("leftTicketDTO.from_station", fromStation);
-            request.Params.Add("leftTicketDTO.to_station", toStation);
-            request.Params.Add("purpose_codes", "ADULT");
-            ArrayList list = TrainHttpContext.Send(request);
-            jsonString = Encoding.UTF8.GetString(list[1] as byte[]);
-            reulst = JsonHelper.Deserialize<ResponseTicketQuery>(jsonString);
-            string[] data = null;
-            if (reulst.status)
+            jsonString = string.Empty;
+            try
             {
-                data = reulst.data.result;
-            }
-            else if (reulst.messages != null && reulst.messages.Length > 0)
-            {
-                queryInterface = reulst.c_url;
-                request.RequestURL = queryInterface;
-                list = TrainHttpContext.Send(request);
-                if (list.Count == 2)
+
+
+                RequestPackage request = new RequestPackage();
+                request.Method = EHttpMethod.Get.ToString();
+                request.RefererURL = "/otn/leftTicket/init";
+                request.RequestURL = "/otn/leftTicket/queryZ";
+                request.Params.Add("leftTicketDTO.train_date", date);
+                request.Params.Add("leftTicketDTO.from_station", fromStation);
+                request.Params.Add("leftTicketDTO.to_station", toStation);
+                request.Params.Add("purpose_codes", "ADULT");
+                ArrayList list = TrainHttpContext.Send(request);
+                jsonString = Encoding.UTF8.GetString(list[1] as byte[]);
+                reulst = JsonHelper.Deserialize<ResponseTicketQuery>(jsonString);
+                string[] data = null;
+                if (reulst.status)
                 {
                     data = reulst.data.result;
                 }
-                Log.Write(LogLevel.Info, reulst.messages);
-            }
+                else if (reulst.messages != null && reulst.messages.Length > 0)
+                {
+                    queryInterface = reulst.c_url;
+                    request.RequestURL = queryInterface;
+                    list = TrainHttpContext.Send(request);
+                    if (list.Count == 2)
+                    {
+                        data = reulst.data.result;
+                    }
+                    Log.Write(LogLevel.Info, reulst.messages);
+                }
 
+
+            }
+            catch (Exception)
+            {
+
+            }
             return reulst;
         }
 
@@ -121,14 +131,23 @@ namespace TrainBLL
         /// <returns></returns>
         public ResponsePassenger GetPassenger()
         {
-            RequestPackage request = new RequestPackage();
-            request.RequestURL = "/otn/confirmPassenger/getPassengerDTOs";
-            request.RefererURL = "/otn/confirmPassenger/initDc";
-            request.Method = "post";
-            request.Params.Add("_json_att", string.Empty);
-            ArrayList list = TrainHttpContext.Send(request);
-            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-            var response = JsonConvert.DeserializeObject<ResponsePassenger>(jsonResult);
+            var response = new ResponsePassenger();
+            try
+            {
+                RequestPackage request = new RequestPackage();
+                request.RequestURL = "/otn/confirmPassenger/getPassengerDTOs";
+                request.RefererURL = "/otn/confirmPassenger/initDc";
+                request.Method = "post";
+                request.Params.Add("_json_att", string.Empty);
+                ArrayList list = TrainHttpContext.Send(request);
+                string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                response = JsonConvert.DeserializeObject<ResponsePassenger>(jsonResult);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return response;
         }
     }

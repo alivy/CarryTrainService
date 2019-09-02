@@ -52,8 +52,8 @@ namespace TrainBLL
             return package;
         }
 
-        
-      
+
+
         /// <summary>
         /// 检查登陆状态
         /// </summary>
@@ -66,7 +66,7 @@ namespace TrainBLL
             jsonResult = string.Empty;
             ResponseLogin package = null;
             RequestPackage request = new RequestPackage();
-            request.Params.Add("_json_att","");
+            request.Params.Add("_json_att", "");
             request.RequestURL = "/otn/login/checkUser";
             request.RefererURL = "/otn/leftTicket/init";
             request.Method = "post";
@@ -166,18 +166,27 @@ namespace TrainBLL
             jsonResult = string.Empty;
             ResponseCaptchaCheck package = null;
             RequestPackage request = new RequestPackage();
-            request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
-            request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
-            request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
-            request.RequestURL = "/passport/captcha/captcha-check";
-            request.RefererURL = "/otn/login/init";
-            request.Method = "post";
-            ArrayList list = TrainHttpContext.Send(request);
-            if (list.Count == 2)
+            try
             {
-                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
-                package = JsonConvert.DeserializeObject<ResponseCaptchaCheck>(jsonResult);
-                Log.Write(LogLevel.Info, jsonResult);
+
+                request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
+                request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
+                request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
+                request.RequestURL = "/passport/captcha/captcha-check";
+                request.RefererURL = "/otn/login/init";
+                request.Method = "post";
+                ArrayList list = TrainHttpContext.Send(request);
+                if (list.Count == 2)
+                {
+                    jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                    package = JsonConvert.DeserializeObject<ResponseCaptchaCheck>(jsonResult);
+                    Log.Write(LogLevel.Info, jsonResult);
+                }
+            }
+            catch (Exception)
+            {
+                package.result_message = "验证错误";
+                package.status_code = 0000;
             }
             return package;
         }
@@ -216,35 +225,38 @@ namespace TrainBLL
         /// <summary>
         /// 获取验证码
         /// </summary>
-        public Tuple<int,string, Stream> GetValidateCode()
+        public Tuple<int, string, Stream> GetValidateCode()
         {
             var code = 888;
             string imgName = string.Empty;
             Stream stream = null;
             try
             {
-                RequestPackage request = new RequestPackage("/otn/login/init");
-                ArrayList list = TrainHttpContext.GetHtmlData(request);
-                if (list.Count == 3)
-                {
-                    request.RequestURL = "/passport/captcha/captcha-image";
-                    request.Params.Add("login_site", "E");
-                    request.Params.Add("module", "login");
-                    request.Params.Add("rand", "sjrand");
-                    request.Params.Add("0.21660476430599007", "");
-                    imgName = list[2] + ".png";
-                    stream = TrainHttpContext.DownloadCode(request);  
-                }
-                else
-                {
-                    Log.Write(LogLevel.Info, "请求/otn/login/init失败");
-                }
+                //RequestPackage request = new RequestPackage("/otn/login/init");
+                //ArrayList list = TrainHttpContext.GetHtmlData(request);
+                //if (list.Count == 3)
+                //{
+                RequestPackage request = new RequestPackage();
+                request.RequestURL = "/passport/captcha/captcha-image";
+                request.Params.Add("login_site", "E");
+                request.Params.Add("module", "login");
+                request.Params.Add("rand", "sjrand");
+                request.Params.Add("0.21660476430599007", "");
+                imgName = Guid.NewGuid().ToString() + ".png";
+                stream = TrainHttpContext.DownloadCode(request);
+                string url = @"..\Material\Img\code";
+                SaveValidateCode(stream, url);
+                //}
+                //else
+                //{
+                //    Log.Write(LogLevel.Info, "请求/otn/login/init失败");
+                //}
             }
             catch (Exception ex)
             {
                 Log.Write(LogLevel.Error, ex.Message, ex);
             }
-            return new Tuple<int, string, Stream>(code, imgName,stream);
+            return new Tuple<int, string, Stream>(code, imgName, stream);
         }
 
         /// <summary>

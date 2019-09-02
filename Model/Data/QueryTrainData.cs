@@ -120,7 +120,179 @@ namespace Model.Data
                     return train_date;
                 }
             }
-         
+
+            /// <summary>
+            /// 高级软卧
+            /// </summary>
+            public string gr_num { get; set; }
+            /// <summary>
+            /// 其它
+            /// </summary>
+            public string qt_num { get; set; }
+            /// <summary>
+            /// 软卧
+            /// </summary>
+            public string rw_num { get; set; }
+            /// <summary>
+            /// 软座
+            /// </summary>
+            public string rz_num { get; set; }        
+            /// <summary>
+            /// 无座
+            /// </summary>
+            public string wz_num { get; set; }
+            /// <summary>
+            /// 动卧
+            /// </summary>
+            public string dw_num { get; set; }
+            /// <summary>
+            /// 硬卧
+            /// </summary>
+            public string yw_num { get; set; }
+            /// <summary>
+            /// 硬座
+            /// </summary>
+            public string yz_num { get; set; }
+            /// <summary>
+            /// 二等座
+            /// </summary>
+            public string ze_num { get; set; }
+            /// <summary>
+            /// 一等座
+            /// </summary>
+            public string zy_num { get; set; }
+            /// <summary>
+            /// 商务座
+            /// </summary>
+            public string swz_num { get; set; }
+
+            #region 测试使用
+            ///// <summary>
+            ///// 测试21
+            ///// </summary>
+            //public string test_num21 { get; set; }
+            ///// <summary>
+            ///// 测试22
+            ///// </summary>
+            //public string test_num22 { get; set; }
+            ///// <summary>
+            ///// 测试23
+            ///// </summary>
+            //public string test_num23 { get; set; }
+            ///// <summary>
+            ///// 测试24
+            ///// </summary>
+            //public string test_num24 { get; set; }
+            ///// <summary>
+            ///// 测试25
+            ///// </summary>
+            //public string test_num25 { get; set; }
+            ///// <summary>
+            ///// 测试26
+            ///// </summary>
+            //public string test_num26 { get; set; }
+            ///// <summary>
+            ///// 测试27
+            ///// </summary>
+            //public string test_num27 { get; set; }
+            ///// <summary>
+            ///// 测试28
+            ///// </summary>
+            //public string test_num28 { get; set; }
+            ///// <summary>
+            ///// 测试29
+            ///// </summary>
+            //public string test_num29 { get; set; }
+            ///// <summary>
+            ///// 测试30
+            ///// </summary>
+            //public string test_num30 { get; set; }
+            ///// <summary>
+            ///// 测试31
+            ///// </summary>
+            //public string test_num31 { get; set; }
+            ///// <summary>
+            ///// 测试32
+            ///// </summary>
+            //public string test_num32 { get; set; }
+            ///// <summary>
+            ///// 测试33
+            ///// </summary>
+            //public string test_num33 { get; set; }
+            ///// <summary>
+            ///// 测试34
+            ///// </summary>
+            //public string test_num34 { get; set; }
+            #endregion
+        }
+
+        /// <summary>
+        /// 用户展示数据
+        /// </summary>
+        public class DetailDataAction
+        {
+            /// <summary>
+            /// 车次编号id
+            /// </summary>
+            public string TrainId { get; set; }
+
+            /// <summary>
+            /// 操作描述
+            /// 如 ：预定
+            /// </summary>
+            public string OperatRemark { get; set; }
+
+            /// <summary>
+            /// 车次编号
+            /// </summary>
+            public string TrainNo { get; set; }
+            /// <summary>
+            /// 车次起始站点编号
+            /// </summary>
+            public string StartStationTelecode { get; set; }
+            ///// <summary>
+            ///// 车次起始站点名称
+            ///// </summary>
+            //public string StartStationName { get; set; }
+            /// <summary>
+            /// 车次终点站点编号
+            /// </summary>
+            public string EndStationTelecode { get; set; }
+            ///// <summary>
+            ///// 车次终点站点名称
+            ///// </summary>
+            //public string EndStationName { get; set; }
+            /// <summary>
+            /// 购票出发站编号
+            /// </summary>
+            public string FromStationTelecode { get; set; }
+            /// <summary>
+            ///  购票目的站点编号
+            /// </summary>
+            public string ToStationTelecode { get; set; }
+            /// <summary>
+            /// 出发站到达站
+            /// </summary>
+            public string FromArrivalsStationName { get; set; }
+            /// <summary>
+            /// 出发时间-到达时间
+            /// </summary>
+            public string StartArriveTime { get; set; }
+            /// <summary>
+            /// 经历时间
+            /// </summary>
+            public string lishi { get; set; }
+            /// <summary>
+            /// 是否跨天
+            /// "Y" 是 "N" 否 
+            /// </summary>
+            public string CrossDays { get; set; }
+
+            /// <summary>
+            /// 出发日期
+            /// </summary>
+            public string DepartureDate { get; set; }
+
             /// <summary>
             /// 高级软卧
             /// </summary>
@@ -138,17 +310,13 @@ namespace Model.Data
             /// </summary>
             public string rz_num { get; set; }
             /// <summary>
-            /// 特等座
-            /// </summary>
-            public string tz_num { get; set; }
-            /// <summary>
             /// 无座
             /// </summary>
             public string wz_num { get; set; }
             /// <summary>
-            /// 
+            /// 动卧
             /// </summary>
-            public string yb_num { get; set; }
+            public string dw_num { get; set; }
             /// <summary>
             /// 硬卧
             /// </summary>

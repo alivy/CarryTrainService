@@ -44,7 +44,7 @@ namespace CarryTrainFrom
         private void LoadEvents()
         {
             GetValidateCode();
-            this.timer.Tick += new EventHandler(timer_Tick);
+            timer.Tick += new EventHandler(timer_Tick);
         }
 
 
@@ -63,7 +63,7 @@ namespace CarryTrainFrom
                     LoginBll train = new LoginBll();
                     var code = train.GetValidateCode();
                     using (var picCode = code.Item3)
-                        this.Invoke(new Action(() => ShowValidateCode(picCode)));
+                        Invoke(new Action(() => ShowValidateCode(picCode)));
                 });
             }
             catch (Exception ex)
@@ -92,14 +92,14 @@ namespace CarryTrainFrom
             try
             {
                 if (stream == null)
-                    this.picCode.Image = FrmSource.login_1;
-                if (this.timer.Enabled)
-                    this.timer.Stop();
-                this.picCode.Image = Image.FromStream(stream);
+                    picCode.Image = FrmSource.login_1;
+                if (timer.Enabled)
+                    timer.Stop();
+                picCode.Image = Image.FromStream(stream);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Write(LogLevel.Error, ex.Message, ex);
             }
         }
 
@@ -154,7 +154,7 @@ namespace CarryTrainFrom
 
         }
 
-      
+
 
 
         /// <summary>
@@ -208,11 +208,11 @@ namespace CarryTrainFrom
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                Log.Write(LogLevel.Error, ex.Message,ex);
             }
         }
 
-      
+
         /// <summary>
         /// 切换验证码
         /// </summary>
@@ -220,9 +220,9 @@ namespace CarryTrainFrom
         /// <param name="e"></param>
         private void ChangeCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!this.timer.Enabled)
+            if (!timer.Enabled)
             {
-                this.ClearCodeImg();
+                ClearCodeImg();
             }
         }
 
@@ -238,6 +238,11 @@ namespace CarryTrainFrom
             else
                 _res_index++;
             this.picCode.Image = image;
+        }
+
+        private void picCode_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

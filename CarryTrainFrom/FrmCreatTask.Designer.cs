@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "",
-            "测试1",
-            "测试2"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
@@ -50,12 +63,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.TrainNumber = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dataPassenger = new System.Windows.Forms.DataGridView();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.departureDate = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
@@ -79,23 +89,6 @@
             this.departureStation = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataTrain = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -108,6 +101,34 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button4 = new System.Windows.Forms.Button();
+            this.cb_check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TrainId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartStationTelecode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndStationTelecode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromStationTelecode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ToStationTelecode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrainNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromArrivalsStationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartArriveTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CrossDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lishi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.swz_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zy_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ze_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gr_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rw_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dw_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yz_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rz_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wz_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yw_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qt_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departure_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OperatRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chek = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -119,34 +140,20 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listView1);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.TrainNumber);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.dataPassenger);
-            this.groupBox1.Location = new System.Drawing.Point(12, 495);
+            this.groupBox1.Location = new System.Drawing.Point(12, 464);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(827, 301);
+            this.groupBox1.Size = new System.Drawing.Size(843, 332);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选取乘车人信息";
-            // 
-            // listView1
-            // 
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.listView1.Location = new System.Drawing.Point(424, 71);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // panel1
             // 
@@ -301,19 +308,16 @@
             this.label8.TabIndex = 4;
             this.label8.Text = "* 已选车次：";
             // 
-            // listBox1
+            // TrainNumber
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Items.AddRange(new object[] {
-            "G1020",
-            "G1020",
-            "G1020",
-            "G1020"});
-            this.listBox1.Location = new System.Drawing.Point(671, 55);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 232);
-            this.listBox1.TabIndex = 3;
+            this.TrainNumber.FormattingEnabled = true;
+            this.TrainNumber.ItemHeight = 12;
+            this.TrainNumber.Items.AddRange(new object[] {
+            ""});
+            this.TrainNumber.Location = new System.Drawing.Point(671, 55);
+            this.TrainNumber.Name = "TrainNumber";
+            this.TrainNumber.Size = new System.Drawing.Size(120, 232);
+            this.TrainNumber.TabIndex = 3;
             // 
             // label7
             // 
@@ -326,34 +330,19 @@
             // 
             // dataPassenger
             // 
+            this.dataPassenger.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataPassenger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataPassenger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chek,
             this.Column18,
             this.Column19,
             this.Column20});
             this.dataPassenger.Location = new System.Drawing.Point(13, 53);
             this.dataPassenger.Name = "dataPassenger";
+            this.dataPassenger.RowHeadersVisible = false;
             this.dataPassenger.RowTemplate.Height = 23;
-            this.dataPassenger.Size = new System.Drawing.Size(204, 234);
+            this.dataPassenger.Size = new System.Drawing.Size(194, 234);
             this.dataPassenger.TabIndex = 0;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "联系人";
-            this.Column18.Name = "Column18";
-            this.Column18.Width = 80;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "身份证";
-            this.Column19.Name = "Column19";
-            this.Column19.Visible = false;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "状态";
-            this.Column20.Name = "Column20";
-            this.Column20.Width = 80;
             // 
             // groupBox3
             // 
@@ -380,7 +369,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1154, 109);
+            this.groupBox3.Size = new System.Drawing.Size(1246, 109);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "查询";
@@ -389,14 +378,15 @@
             // 
             this.departureDate.CustomFormat = "yyyy-MM-dd";
             this.departureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.departureDate.Location = new System.Drawing.Point(511, 23);
+            this.departureDate.Location = new System.Drawing.Point(548, 23);
             this.departureDate.Name = "departureDate";
             this.departureDate.Size = new System.Drawing.Size(135, 21);
             this.departureDate.TabIndex = 4;
+            this.departureDate.ValueChanged += new System.EventHandler(this.departureDate_ValueChanged);
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(946, 28);
+            this.btnQuery.Location = new System.Drawing.Point(942, 15);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(184, 60);
             this.btnQuery.TabIndex = 20;
@@ -407,7 +397,7 @@
             // NCar
             // 
             this.NCar.AutoSize = true;
-            this.NCar.Location = new System.Drawing.Point(833, 57);
+            this.NCar.Location = new System.Drawing.Point(870, 57);
             this.NCar.Name = "NCar";
             this.NCar.Size = new System.Drawing.Size(48, 16);
             this.NCar.TabIndex = 19;
@@ -417,7 +407,7 @@
             // KCar
             // 
             this.KCar.AutoSize = true;
-            this.KCar.Location = new System.Drawing.Point(779, 57);
+            this.KCar.Location = new System.Drawing.Point(816, 57);
             this.KCar.Name = "KCar";
             this.KCar.Size = new System.Drawing.Size(48, 16);
             this.KCar.TabIndex = 18;
@@ -427,7 +417,7 @@
             // TCar
             // 
             this.TCar.AutoSize = true;
-            this.TCar.Location = new System.Drawing.Point(725, 57);
+            this.TCar.Location = new System.Drawing.Point(762, 57);
             this.TCar.Name = "TCar";
             this.TCar.Size = new System.Drawing.Size(48, 16);
             this.TCar.TabIndex = 17;
@@ -437,7 +427,7 @@
             // ZCar
             // 
             this.ZCar.AutoSize = true;
-            this.ZCar.Location = new System.Drawing.Point(671, 57);
+            this.ZCar.Location = new System.Drawing.Point(708, 57);
             this.ZCar.Name = "ZCar";
             this.ZCar.Size = new System.Drawing.Size(48, 16);
             this.ZCar.TabIndex = 16;
@@ -447,7 +437,7 @@
             // DCar
             // 
             this.DCar.AutoSize = true;
-            this.DCar.Location = new System.Drawing.Point(617, 56);
+            this.DCar.Location = new System.Drawing.Point(654, 56);
             this.DCar.Name = "DCar";
             this.DCar.Size = new System.Drawing.Size(48, 16);
             this.DCar.TabIndex = 15;
@@ -457,7 +447,7 @@
             // GCar
             // 
             this.GCar.AutoSize = true;
-            this.GCar.Location = new System.Drawing.Point(563, 56);
+            this.GCar.Location = new System.Drawing.Point(600, 56);
             this.GCar.Name = "GCar";
             this.GCar.Size = new System.Drawing.Size(48, 16);
             this.GCar.TabIndex = 14;
@@ -467,7 +457,7 @@
             // allCarCheck
             // 
             this.allCarCheck.AutoSize = true;
-            this.allCarCheck.Location = new System.Drawing.Point(511, 56);
+            this.allCarCheck.Location = new System.Drawing.Point(548, 56);
             this.allCarCheck.Name = "allCarCheck";
             this.allCarCheck.Size = new System.Drawing.Size(48, 16);
             this.allCarCheck.TabIndex = 13;
@@ -478,7 +468,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(469, 58);
+            this.label6.Location = new System.Drawing.Point(506, 58);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 12;
@@ -531,7 +521,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(469, 27);
+            this.label3.Location = new System.Drawing.Point(506, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 5;
@@ -553,6 +543,7 @@
             this.arrivalsStation.Name = "arrivalsStation";
             this.arrivalsStation.Size = new System.Drawing.Size(120, 21);
             this.arrivalsStation.TabIndex = 3;
+            this.arrivalsStation.Text = "深圳";
             // 
             // label2
             // 
@@ -569,6 +560,7 @@
             this.departureStation.Name = "departureStation";
             this.departureStation.Size = new System.Drawing.Size(120, 21);
             this.departureStation.TabIndex = 1;
+            this.departureStation.Text = "咸宁";
             // 
             // label1
             // 
@@ -581,129 +573,51 @@
             // 
             // dataTrain
             // 
-            this.dataTrain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTrain.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataTrain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataTrain.ColumnHeadersHeight = 40;
+            this.dataTrain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataTrain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column9,
-            this.Column10,
-            this.Column11,
-            this.Column12,
-            this.Column13,
-            this.Column14,
-            this.Column15,
-            this.Column16,
-            this.Column17});
-            this.dataTrain.Location = new System.Drawing.Point(12, 144);
+            this.cb_check,
+            this.TrainId,
+            this.StartStationTelecode,
+            this.EndStationTelecode,
+            this.FromStationTelecode,
+            this.ToStationTelecode,
+            this.TrainNo,
+            this.FromArrivalsStationName,
+            this.StartArriveTime,
+            this.CrossDays,
+            this.lishi,
+            this.swz_num,
+            this.zy_num,
+            this.ze_num,
+            this.gr_num,
+            this.rw_num,
+            this.dw_num,
+            this.yz_num,
+            this.rz_num,
+            this.wz_num,
+            this.yw_num,
+            this.qt_num,
+            this.departure_date,
+            this.OperatRemark});
+            this.dataTrain.Location = new System.Drawing.Point(12, 142);
             this.dataTrain.Name = "dataTrain";
+            this.dataTrain.RowHeadersVisible = false;
             this.dataTrain.RowTemplate.Height = 23;
-            this.dataTrain.Size = new System.Drawing.Size(1154, 323);
+            this.dataTrain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataTrain.Size = new System.Drawing.Size(1246, 302);
             this.dataTrain.TabIndex = 3;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "车次";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 80;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "出发地";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 70;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "目的地";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 70;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "历时";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "商务/特等";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "一等座";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 70;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "二等座";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 70;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "高级软卧";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 90;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "软卧";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 60;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "动卧";
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 60;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "硬卧";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 60;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "软座";
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 60;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "无座";
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 60;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "硬座";
-            this.Column14.Name = "Column14";
-            this.Column14.Width = 60;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "其他";
-            this.Column15.Name = "Column15";
-            this.Column15.Width = 60;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "日期";
-            this.Column16.Name = "Column16";
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "操作";
-            this.Column17.Name = "Column17";
+            this.dataTrain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTrain_CellContentClick);
+            this.dataTrain.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataTrain_CellMouseDoubleClick);
             // 
             // groupBox2
             // 
@@ -718,9 +632,9 @@
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(853, 495);
+            this.groupBox2.Location = new System.Drawing.Point(937, 464);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(321, 301);
+            this.groupBox2.Size = new System.Drawing.Size(321, 332);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "设置";
@@ -825,11 +739,253 @@
             this.button4.Text = "建立任务";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // cb_check
+            // 
+            this.cb_check.DataPropertyName = "IsChecked";
+            this.cb_check.FalseValue = "true";
+            this.cb_check.HeaderText = "";
+            this.cb_check.Name = "cb_check";
+            this.cb_check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cb_check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cb_check.TrueValue = "false";
+            this.cb_check.Visible = false;
+            this.cb_check.Width = 30;
+            // 
+            // TrainId
+            // 
+            this.TrainId.DataPropertyName = "TrainId";
+            this.TrainId.HeaderText = "TrainId";
+            this.TrainId.Name = "TrainId";
+            this.TrainId.Visible = false;
+            this.TrainId.Width = 30;
+            // 
+            // StartStationTelecode
+            // 
+            this.StartStationTelecode.DataPropertyName = "StartStationTelecode";
+            this.StartStationTelecode.HeaderText = "StartStationTelecode";
+            this.StartStationTelecode.Name = "StartStationTelecode";
+            this.StartStationTelecode.Visible = false;
+            // 
+            // EndStationTelecode
+            // 
+            this.EndStationTelecode.DataPropertyName = "EndStationTelecode";
+            this.EndStationTelecode.HeaderText = "EndStationTelecode";
+            this.EndStationTelecode.Name = "EndStationTelecode";
+            this.EndStationTelecode.Visible = false;
+            // 
+            // FromStationTelecode
+            // 
+            this.FromStationTelecode.DataPropertyName = "FromStationTelecode";
+            this.FromStationTelecode.HeaderText = "FromStationTelecode";
+            this.FromStationTelecode.Name = "FromStationTelecode";
+            this.FromStationTelecode.Visible = false;
+            // 
+            // ToStationTelecode
+            // 
+            this.ToStationTelecode.DataPropertyName = "ToStationTelecode";
+            this.ToStationTelecode.HeaderText = "ToStationTelecode";
+            this.ToStationTelecode.Name = "ToStationTelecode";
+            this.ToStationTelecode.Visible = false;
+            // 
+            // TrainNo
+            // 
+            this.TrainNo.DataPropertyName = "TrainNo";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TrainNo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.TrainNo.HeaderText = "车次";
+            this.TrainNo.Name = "TrainNo";
+            this.TrainNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.TrainNo.Width = 60;
+            // 
+            // FromArrivalsStationName
+            // 
+            this.FromArrivalsStationName.DataPropertyName = "FromArrivalsStationName";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FromArrivalsStationName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.FromArrivalsStationName.HeaderText = "出发-到达";
+            this.FromArrivalsStationName.Name = "FromArrivalsStationName";
+            this.FromArrivalsStationName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.FromArrivalsStationName.Width = 90;
+            // 
+            // StartArriveTime
+            // 
+            this.StartArriveTime.DataPropertyName = "StartArriveTime";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.StartArriveTime.DefaultCellStyle = dataGridViewCellStyle4;
+            this.StartArriveTime.HeaderText = "出-到（时间）";
+            this.StartArriveTime.Name = "StartArriveTime";
+            this.StartArriveTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.StartArriveTime.Width = 110;
+            // 
+            // CrossDays
+            // 
+            this.CrossDays.DataPropertyName = "CrossDays";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CrossDays.DefaultCellStyle = dataGridViewCellStyle5;
+            this.CrossDays.HeaderText = "跨天";
+            this.CrossDays.Name = "CrossDays";
+            this.CrossDays.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.CrossDays.Visible = false;
+            this.CrossDays.Width = 40;
+            // 
+            // lishi
+            // 
+            this.lishi.DataPropertyName = "lishi";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.lishi.DefaultCellStyle = dataGridViewCellStyle6;
+            this.lishi.HeaderText = "历时";
+            this.lishi.Name = "lishi";
+            this.lishi.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.lishi.Width = 40;
+            // 
+            // swz_num
+            // 
+            this.swz_num.DataPropertyName = "swz_num";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.swz_num.DefaultCellStyle = dataGridViewCellStyle7;
+            this.swz_num.HeaderText = "商务/特等";
+            this.swz_num.Name = "swz_num";
+            this.swz_num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // zy_num
+            // 
+            this.zy_num.DataPropertyName = "zy_num";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.zy_num.DefaultCellStyle = dataGridViewCellStyle8;
+            this.zy_num.HeaderText = "一等座";
+            this.zy_num.Name = "zy_num";
+            this.zy_num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.zy_num.Width = 70;
+            // 
+            // ze_num
+            // 
+            this.ze_num.DataPropertyName = "ze_num";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ze_num.DefaultCellStyle = dataGridViewCellStyle9;
+            this.ze_num.HeaderText = "二等座";
+            this.ze_num.Name = "ze_num";
+            this.ze_num.Width = 70;
+            // 
+            // gr_num
+            // 
+            this.gr_num.DataPropertyName = "gr_num";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.gr_num.DefaultCellStyle = dataGridViewCellStyle10;
+            this.gr_num.HeaderText = "高级软卧";
+            this.gr_num.Name = "gr_num";
+            this.gr_num.Width = 90;
+            // 
+            // rw_num
+            // 
+            this.rw_num.DataPropertyName = "rw_num";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rw_num.DefaultCellStyle = dataGridViewCellStyle11;
+            this.rw_num.HeaderText = "软卧";
+            this.rw_num.Name = "rw_num";
+            this.rw_num.Width = 60;
+            // 
+            // dw_num
+            // 
+            this.dw_num.DataPropertyName = "dw_num";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dw_num.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dw_num.HeaderText = "动卧";
+            this.dw_num.Name = "dw_num";
+            this.dw_num.Width = 60;
+            // 
+            // yz_num
+            // 
+            this.yz_num.DataPropertyName = "yz_num";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.yz_num.DefaultCellStyle = dataGridViewCellStyle13;
+            this.yz_num.HeaderText = "硬卧";
+            this.yz_num.Name = "yz_num";
+            this.yz_num.Width = 60;
+            // 
+            // rz_num
+            // 
+            this.rz_num.DataPropertyName = "rz_num";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rz_num.DefaultCellStyle = dataGridViewCellStyle14;
+            this.rz_num.HeaderText = "软座";
+            this.rz_num.Name = "rz_num";
+            this.rz_num.Width = 60;
+            // 
+            // wz_num
+            // 
+            this.wz_num.DataPropertyName = "wz_num";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.wz_num.DefaultCellStyle = dataGridViewCellStyle15;
+            this.wz_num.HeaderText = "无座";
+            this.wz_num.Name = "wz_num";
+            this.wz_num.Width = 60;
+            // 
+            // yw_num
+            // 
+            this.yw_num.DataPropertyName = "yw_num";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.yw_num.DefaultCellStyle = dataGridViewCellStyle16;
+            this.yw_num.HeaderText = "硬座";
+            this.yw_num.Name = "yw_num";
+            this.yw_num.Width = 60;
+            // 
+            // qt_num
+            // 
+            this.qt_num.DataPropertyName = "qt_num";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.qt_num.DefaultCellStyle = dataGridViewCellStyle17;
+            this.qt_num.HeaderText = "其他";
+            this.qt_num.Name = "qt_num";
+            this.qt_num.Width = 60;
+            // 
+            // departure_date
+            // 
+            this.departure_date.DataPropertyName = "DepartureDate";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.departure_date.DefaultCellStyle = dataGridViewCellStyle18;
+            this.departure_date.HeaderText = "日期";
+            this.departure_date.Name = "departure_date";
+            this.departure_date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.departure_date.Width = 80;
+            // 
+            // OperatRemark
+            // 
+            this.OperatRemark.DataPropertyName = "OperatRemark";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.OperatRemark.DefaultCellStyle = dataGridViewCellStyle19;
+            this.OperatRemark.HeaderText = "操作";
+            this.OperatRemark.Name = "OperatRemark";
+            this.OperatRemark.Width = 80;
+            // 
+            // chek
+            // 
+            this.chek.HeaderText = "";
+            this.chek.Name = "chek";
+            this.chek.Width = 30;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "联系人";
+            this.Column18.Name = "Column18";
+            this.Column18.Width = 80;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "身份证";
+            this.Column19.Name = "Column19";
+            this.Column19.Visible = false;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "状态";
+            this.Column20.Name = "Column20";
+            this.Column20.Width = 80;
+            // 
             // FrmCreatTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 808);
+            this.ClientSize = new System.Drawing.Size(1281, 808);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dataTrain);
             this.Controls.Add(this.groupBox3);
@@ -894,24 +1050,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.ListBox TrainNumber;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.Label label13;
@@ -924,9 +1063,33 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chek;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn cb_check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrainId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartStationTelecode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndStationTelecode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FromStationTelecode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ToStationTelecode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrainNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FromArrivalsStationName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartArriveTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CrossDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lishi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn swz_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn zy_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ze_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gr_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rw_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dw_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yz_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rz_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wz_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yw_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qt_num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn departure_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OperatRemark;
     }
 }

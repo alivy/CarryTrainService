@@ -86,6 +86,7 @@
             this.picCode.Size = new System.Drawing.Size(295, 192);
             this.picCode.TabIndex = 4;
             this.picCode.TabStop = false;
+            this.picCode.Click += new System.EventHandler(this.picCode_Click);
             this.picCode.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picCode_MouseClick);
             // 
             // timer
@@ -106,7 +107,6 @@
             this.Name = "FrmCode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmCode";
-        
             ((System.ComponentModel.ISupportInitialize)(this.picCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

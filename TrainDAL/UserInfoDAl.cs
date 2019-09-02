@@ -22,8 +22,8 @@ namespace TrainDAL
         public int UserInfoInsert(DBUserInfo user)
         {
             string sql = string.Format("SELECT userId,userName,userPwd,Starts FROM UserInfo where userName = '{0}'", user.userName);
-            var sqlfrist = DBHelp.ExecuteScalar(sql);
-            if (sqlfrist == 0)
+            var sqlFrist = DBHelp.ExecuteDataTable(sql);
+            if (sqlFrist == null || sqlFrist.Rows.Count == 0)
             {
                 user.userId = Guid.NewGuid().ToString();
                 sql = string.Format(@"INSERT INTO UserInfo (userId,userName,userPwd,Starts) VALUES ('{0}','{1}','{2}',{3})", user.userId, user.userName, user.userPwd, user.Starts);
@@ -31,9 +31,9 @@ namespace TrainDAL
             else
             {
                 user.userId = Guid.NewGuid().ToString();
-                sql = string.Format(@" update set userPwd = '{0}',Starts='{1}' from UserInfo where  userName = '{2}' ", user.userPwd, user.Starts, user.userName);
+                sql = string.Format(@"update set userPwd = '{0}',Starts='{1}' from UserInfo where  userName = '{2}' ", user.userPwd, user.Starts, user.userName);
             }
-            return SqliteHelper.ExecuteNonQuery(sql, null);
+            return DBHelp.ExecuteNonQuery(sql);
         }
 
         /// <summary>

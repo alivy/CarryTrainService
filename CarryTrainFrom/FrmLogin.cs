@@ -1,4 +1,5 @@
 ﻿using Common;
+using LiteHelp;
 using Model;
 using Model.Model;
 using System;
@@ -34,19 +35,27 @@ namespace CarryTrainFrom
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //string userName = txtLoginName.Text;
-            //string userPwd = txtLoginPwd.Text;
-            string userName = "17620372030";
-            string userPwd = "yanhaomiao123";
+            string userName = txtLoginName.Text;
+            string userPwd = txtLoginPwd.Text;
+            if (string.IsNullOrEmpty(userName))
+            {
+                var user = AccountHelp.UserDictionary["test"];
+                userName = user.UserName;
+                userPwd = user.UserPwd;
+            }
             var train = new LoginBll();
-
             var check = UserCheck(userName, userPwd);
-
             if (check.Item1 != 0)
                 MessageBox.Show(check.Item2);
             this.FrmCode(userName, userPwd);
         }
 
+        /// <summary>
+        /// 调取验证码
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="userPwd"></param>
+        /// <returns></returns>
         private DialogResult FrmCode(string userName, string userPwd)
         {
             DialogResult result = DialogResult.Cancel;

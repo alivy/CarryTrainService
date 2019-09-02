@@ -90,7 +90,7 @@ namespace Common.Help
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             //属性配置
             request.AllowWriteStreamBuffering = true;
-            request.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            request.Credentials = CredentialCache.DefaultCredentials;
             request.MaximumResponseHeadersLength = -1;
             request.Accept = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
@@ -143,6 +143,7 @@ namespace Common.Help
 
             ServicePointManager.ServerCertificateValidationCallback += (se, cert, chain, sslerror) => { return true; };
             ArrayList list = new ArrayList();
+            
             HttpWebRequest request = null;
             HttpWebResponse response = null;
             string url = HOST_URL + package.RequestURL;
@@ -158,6 +159,8 @@ namespace Common.Help
                 request.CookieContainer = Cookie;
                 request.Referer = HOST_URL + package.RefererURL;
                 request.Method = method;
+                request.Host = "kyfw.12306.cn";
+          
             }
             else
             {

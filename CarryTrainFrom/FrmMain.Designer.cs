@@ -65,6 +65,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btnCompleteOrder = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.FrmTestBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).BeginInit();
@@ -73,10 +79,13 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataUserInfoView
             // 
+            this.dataUserInfoView.BackgroundColor = System.Drawing.Color.White;
             this.dataUserInfoView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataUserInfoView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
@@ -149,6 +158,7 @@
             // 
             // dataContactInfoView
             // 
+            this.dataContactInfoView.BackgroundColor = System.Drawing.Color.White;
             this.dataContactInfoView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataContactInfoView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ContactName,
@@ -318,6 +328,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.FrmTestBtn);
             this.groupBox2.Controls.Add(this.btnDelTask);
             this.groupBox2.Controls.Add(this.btnStopTask);
             this.groupBox2.Controls.Add(this.btnStartTask);
@@ -368,6 +379,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 68);
             this.dataGridView1.Name = "dataGridView1";
@@ -396,12 +408,73 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.dataGridView2);
+            this.tabPage4.Controls.Add(this.button5);
+            this.tabPage4.Controls.Add(this.btnCompleteOrder);
+            this.tabPage4.Controls.Add(this.button3);
+            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(1391, 726);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "订单页";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(41, 107);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(1315, 595);
+            this.dataGridView2.TabIndex = 4;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(414, 42);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(95, 36);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "取消订单";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // btnCompleteOrder
+            // 
+            this.btnCompleteOrder.Location = new System.Drawing.Point(166, 42);
+            this.btnCompleteOrder.Name = "btnCompleteOrder";
+            this.btnCompleteOrder.Size = new System.Drawing.Size(95, 36);
+            this.btnCompleteOrder.TabIndex = 2;
+            this.btnCompleteOrder.Text = "未出行订单";
+            this.btnCompleteOrder.UseVisualStyleBackColor = true;
+            this.btnCompleteOrder.Click += new System.EventHandler(this.btnCompleteOrder_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(286, 42);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(95, 36);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "已完成订单";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(41, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 36);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "未完成订单";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // FrmTestBtn
+            // 
+            this.FrmTestBtn.Location = new System.Drawing.Point(591, 20);
+            this.FrmTestBtn.Name = "FrmTestBtn";
+            this.FrmTestBtn.Size = new System.Drawing.Size(129, 39);
+            this.FrmTestBtn.TabIndex = 5;
+            this.FrmTestBtn.Text = "测试购票";
+            this.FrmTestBtn.UseVisualStyleBackColor = true;
+            this.FrmTestBtn.Click += new System.EventHandler(this.FrmTestBtn_Click);
             // 
             // FrmMain
             // 
@@ -423,6 +496,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,6 +537,12 @@
         private System.Windows.Forms.Button btnStartTask;
         private System.Windows.Forms.Button btnAddTask;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnCompleteOrder;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FrmTestBtn;
     }
 }
 

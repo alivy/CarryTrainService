@@ -54,7 +54,6 @@ namespace LiteHelp
                 {
                     SQLiteCommand cmd = new SQLiteCommand(safeSql, Connection);
                     cmd.Transaction = trans;
-
                     if (Connection.State != ConnectionState.Open)
                     {
                         Connection.Open();
@@ -63,8 +62,9 @@ namespace LiteHelp
                     trans.Commit();
                     return result;
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Log.Write(LogLevel.Error, "执行数据库执行增、删、改命令失败", ex);
                     trans.Rollback();
                     return 0;
                 }

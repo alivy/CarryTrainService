@@ -16,9 +16,11 @@ namespace CarryTrainFrom
     {
         private List<UserInfo> userInfos;
         public UserInfoBll userInfoBll;
+        public OrderBll orderBll;
         public FrmMain()
         {
             userInfoBll = new UserInfoBll();
+            orderBll = new OrderBll();
             userInfos = new List<UserInfo>();
             InitializeComponent();
 
@@ -86,6 +88,24 @@ namespace CarryTrainFrom
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+
+        }
+
+        /// <summary>
+        /// 查询未完成订单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCompleteOrder_Click(object sender, EventArgs e)
+        {
+            orderBll.NoCompleteOrderQuery();
+            orderBll.CompleteOrderQuery();
+        }
+
+        private void FrmTestBtn_Click(object sender, EventArgs e)
+        {
+            FrmTest frmTest = new FrmTest();
+            frmTest.Show();
 
         }
     }
