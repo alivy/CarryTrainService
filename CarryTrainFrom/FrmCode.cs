@@ -186,7 +186,8 @@ namespace CarryTrainFrom
                 if (point.X == 0 || point.Y == 0) return; //非法坐标
                 if (point.Y < 41 || point.Y > 179) return;
                 if (point.X < 5 || point.X > 288) return;
-                (points ?? (points = new List<Point>())).Add(point);
+                points = points ?? new List<Point>();
+                points.Add(point + new Size(0, -41));
                 //添加marker
                 var marker = new PictureBox()
                 {
@@ -198,7 +199,6 @@ namespace CarryTrainFrom
                 };
                 picCode.Controls.Add(marker);
                 marker.BringToFront();
-
                 //添加marker移除事件
                 marker.Click += (x, y) =>
                 {
@@ -208,7 +208,7 @@ namespace CarryTrainFrom
             }
             catch (Exception ex)
             {
-                Log.Write(LogLevel.Error, ex.Message,ex);
+                Log.Write(LogLevel.Error, ex.Message, ex);
             }
         }
 

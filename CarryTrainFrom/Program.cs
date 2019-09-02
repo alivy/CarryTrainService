@@ -17,8 +17,9 @@ namespace CarryTrainFrom
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmCreatTask());
-            Application.Run(new FrmMain());
+            //Application.Run(new FrmMain());
             //Application.Run(new FrmTest());
+            Application.Run(new FrmCode());
         }
     }
 }
