@@ -35,6 +35,7 @@
             this.QueryOrderWaitTimeBtn = new System.Windows.Forms.Button();
             this.ResultOrderForWcQueueBtn = new System.Windows.Forms.Button();
             this.SubmitOrderRequestBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CheckOrderBtn
@@ -105,11 +106,22 @@
             this.SubmitOrderRequestBtn.UseVisualStyleBackColor = true;
             this.SubmitOrderRequestBtn.Click += new System.EventHandler(this.SubmitOrderRequest_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(59, 630);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 46);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "获取验证码";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 483);
+            this.ClientSize = new System.Drawing.Size(800, 703);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SubmitOrderRequestBtn);
             this.Controls.Add(this.ResultOrderForWcQueueBtn);
             this.Controls.Add(this.QueryOrderWaitTimeBtn);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Button QueryOrderWaitTimeBtn;
         private System.Windows.Forms.Button ResultOrderForWcQueueBtn;
         private System.Windows.Forms.Button SubmitOrderRequestBtn;
+        private System.Windows.Forms.Button button1;
     }
 }

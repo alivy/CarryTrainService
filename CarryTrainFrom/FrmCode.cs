@@ -61,9 +61,9 @@ namespace CarryTrainFrom
                 ThreadPool.QueueUserWorkItem(x =>
                 {
                     LoginBll train = new LoginBll();
-                    var code = train.GetValidateCode();
-                    using (var picCode = code.Item3)
-                        Invoke(new Action(() => ShowValidateCode(picCode)));
+                    var code = train.GetValidateCode_201909();
+                    //using (var picCode = code)
+                    Invoke(new Action(() => ShowValidateCode(code)));
                 });
             }
             catch (Exception ex)
@@ -87,15 +87,15 @@ namespace CarryTrainFrom
         /// <summary>
         /// 显示验证码
         /// </summary>
-        private void ShowValidateCode(Stream stream)
+        private void ShowValidateCode(Image image)
         {
             try
             {
-                if (stream == null)
+                if (image == null)
                     picCode.Image = FrmSource.login_1;
                 if (timer.Enabled)
                     timer.Stop();
-                picCode.Image = Image.FromStream(stream);
+                picCode.Image = image;
             }
             catch (Exception ex)
             {
@@ -140,7 +140,8 @@ namespace CarryTrainFrom
             }
             var train = new LoginBll();
             string jsonResult;
-            var check = train.PostCaptchaCheck(CodePoint(), out jsonResult);
+            var check = train.PostCaptchaCheck201909(CodePoint(), out jsonResult);
+            // var check = train.PostCaptchaCheck(CodePoint(), out jsonResult);
             if (check.result_code == 4)
             {
                 this.Close();
@@ -243,6 +244,15 @@ namespace CarryTrainFrom
         private void picCode_Click(object sender, EventArgs e)
         {
 
+        }
+        /// <summary>
+        /// 取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

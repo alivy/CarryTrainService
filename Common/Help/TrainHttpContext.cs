@@ -20,6 +20,7 @@ namespace Common.Help
         #region 变量
         private const char PARAM_SIGN = '&';
         public static string HOST_URL = "https://kyfw.12306.cn";
+        public static string callback = string.Empty;
         public static CookieContainer Cookie = new CookieContainer();
         #endregion
 
@@ -34,25 +35,32 @@ namespace Common.Help
             HttpWebRequest request;
             HttpWebResponse response;
             ArrayList list = new ArrayList();
-            request = WebRequest.Create(HOST_URL + package.RequestURL) as HttpWebRequest;
-            request.Referer = HOST_URL + package.RefererURL;
-            request.Method = EHttpMethod.Get.ToString();
+            string url = HOST_URL + package.RequestURL;
+            if (package.Params.Count > 0)
+                url = string.Format("{0}?{1}", url, JoinParams(package.Params));
+            request = WebRequest.Create(url) as HttpWebRequest;
+            //属性配置
+            request.AllowWriteStreamBuffering = true;
+            request.Credentials = CredentialCache.DefaultCredentials;
+            request.MaximumResponseHeadersLength = -1;
+            request.Accept = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
+            request.Method = EHttpMethod.Get.ToString();
+            //request.Headers.Add("Accept-Language", "zh-Hans-CN,zh-Hans;q=0.5");
+            //request.Headers.Add("Accept-Encoding", "gzip,deflate");
             request.KeepAlive = true;
             request.CookieContainer = Cookie;
             try
             {
                 //获取服务器返回的资源
                 using (response = (HttpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                    {
-                        Cookie.Add(response.Cookies);
-                        //保存Cookies
-                        list.Add(Cookie);
-                        list.Add(reader.ReadToEnd());
-                        list.Add(Guid.NewGuid().ToString());//图片名
-                    }
+                    Cookie.Add(response.Cookies);
+                    //保存Cookies
+                    list.Add(Cookie);
+                    list.Add(reader.ReadToEnd());
+                    list.Add(Guid.NewGuid().ToString());//图片名
                 }
             }
             catch (WebException ex)
@@ -61,11 +69,9 @@ namespace Common.Help
                 list.Add("发生异常/n/r");
                 WebResponse wr = ex.Response;
                 using (Stream st = wr.GetResponseStream())
+                using (StreamReader sr = new StreamReader(st, Encoding.Default))
                 {
-                    using (StreamReader sr = new StreamReader(st, System.Text.Encoding.Default))
-                    {
-                        list.Add(sr.ReadToEnd());
-                    }
+                    list.Add(sr.ReadToEnd());
                 }
             }
             catch (Exception ex)
@@ -85,6 +91,8 @@ namespace Common.Help
         {
             Stream stream = null;
             string url = HOST_URL + package.RequestURL;
+
+
             if (package.Params.Count > 0)
                 url = string.Format("{0}?{1}", url, JoinParams(package.Params));
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -143,7 +151,6 @@ namespace Common.Help
 
             ServicePointManager.ServerCertificateValidationCallback += (se, cert, chain, sslerror) => { return true; };
             ArrayList list = new ArrayList();
-            
             HttpWebRequest request = null;
             HttpWebResponse response = null;
             string url = HOST_URL + package.RequestURL;
@@ -160,7 +167,7 @@ namespace Common.Help
                 request.Referer = HOST_URL + package.RefererURL;
                 request.Method = method;
                 request.Host = "kyfw.12306.cn";
-          
+
             }
             else
             {
@@ -232,7 +239,10 @@ namespace Common.Help
                 foreach (string key in param.Keys)
                 {
                     string value = param[key];
-                    data.AppendFormat("{0}={1}", key, value);
+                    string str = string.IsNullOrWhiteSpace(value) ? $"{key}" : $"{key}={value}";
+                    data.AppendFormat(str);
+                    if (key.Equals("callback"))
+                        callback = value;
                     if (key != lastKey)
                         data.Append(PARAM_SIGN);
                 }
@@ -241,7 +251,7 @@ namespace Common.Help
         }
         #endregion
 
-       
+
     }
 
 

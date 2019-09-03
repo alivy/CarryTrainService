@@ -47,7 +47,7 @@ namespace CarryTrainFrom
             var check = UserCheck(userName, userPwd);
             if (check.Item1 != 0)
                 MessageBox.Show(check.Item2);
-            this.FrmCode(userName, userPwd);
+            FrmCode(userName, userPwd);
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace CarryTrainFrom
                     UserInfo userInfo = new UserInfo();
                     userInfo.UserName = userName;
                     userInfo.UserPwd = userPwd;
-                    this.Login(userInfo);
-                    this.Close();
+                    Login(userInfo);
+                    Close();
                 }
             }
             return result;

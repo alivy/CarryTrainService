@@ -9,13 +9,9 @@ namespace Model
     [Serializable]
     public class RequestPackage
     {
+
         #region 变量
-        private string _requestURL = string.Empty;
-        private string _refererURL = string.Empty;
         private Dictionary<string, string> _params = null;
-        private string _method = "post";
-        private string _accept = "*/*";
-        private Encoding _encoding = Encoding.ASCII;
         #endregion
 
         #region 构造函数
@@ -24,22 +20,14 @@ namespace Model
         { }
         public RequestPackage(string requestUrl)
         {
-            this._requestURL = requestUrl;
+            this.RequestURL = requestUrl;
         }
         #endregion
 
         #region 属性
 
-        public string RequestURL 
-        {
-            get { return this._requestURL; }
-            set { this._requestURL = value; }
-        }
-        public string RefererURL 
-        {
-            get { return this._refererURL; }
-            set { this._refererURL = value; }
-        }
+        public string RequestURL { get; set; } = string.Empty;
+        public string RefererURL { get; set; } = string.Empty;
         public Dictionary<string, string> Params
         {
             get
@@ -49,21 +37,13 @@ namespace Model
                 return this._params;
             }
         }
-        public string Method
-        {
-            get { return this._method; }
-            set { this._method = value; }
-        }
-        public string Accept
-        {
-            get { return this._accept; }
-            set { this._accept = value; }
-        }
-        public Encoding Encoding
-        {
-            get { return this._encoding; }
-            set { this._encoding = value; }
-        }
+        /// <summary>
+        /// 请求方式
+        /// </summary>
+        public string Method { get; set; } = "post";
+
+        public string Accept { get; set; } = "*/*";
+        public Encoding Encoding { get; set; } = Encoding.ASCII;
         #endregion
     }
 }

@@ -68,6 +68,8 @@
   <ItemGroup>
     <Compile Include="CommonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LoginTest.cs" />
+    <Compile Include="CodeTest.cs" />
     <Compile Include="UserInfoTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +92,9 @@
       <Project>{DE43781F-C9A6-40A6-9687-7094E4FC30DD}</Project>
       <Name>TrainBLL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Img\code\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

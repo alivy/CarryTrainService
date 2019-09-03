@@ -20,6 +20,10 @@ namespace CarryTrainFrom
             InitializeComponent();
         }
 
+
+        #region 订单接口
+
+     
         private void CheckOrderBtn_Click(object sender, EventArgs e)
         {
             string check = orderBll.CheckOrderInfo();
@@ -56,5 +60,21 @@ namespace CarryTrainFrom
             string check = orderBll.SubmitOrderRequest();
             txt.Text = check;
         }
+        #endregion
+
+
+        #region 登陆接口
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoginBll train = new LoginBll();
+            var code = train.GetValidateCode();
+        }
+        #endregion
+
     }
 }

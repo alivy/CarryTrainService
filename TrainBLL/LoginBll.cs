@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.Help;
 using Model;
+using Model.Data._12036.Response;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -20,6 +21,41 @@ namespace TrainBLL
     public class LoginBll
     {
         #region 登陆逻辑
+
+
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="loginPwd"></param>
+        /// <param name="jsonResult"></param>
+        /// <returns></returns>
+        public ResponseLogin PostLoginV1(string loginName, string loginPwd, string point, out string jsonResult)
+        {
+            jsonResult = string.Empty;
+            ResponseLogin package = null;
+            RequestPackage request = new RequestPackage();
+            request.Params.Add("username", System.Web.HttpUtility.UrlEncode(loginName));
+            request.Params.Add("password", System.Web.HttpUtility.UrlEncode(loginPwd));
+            request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
+            request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
+            request.RequestURL = "/passport/web/login";
+            request.RefererURL = "/otn/login/init";
+            request.Method = "post";
+            ArrayList list = TrainHttpContext.Send(request);
+            if (list.Count == 2)
+            {
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
+                Log.Write(LogLevel.Info, jsonResult);
+            }
+            else
+            {
+                Log.Write(LogLevel.Info, list.ToString());
+            }
+            return package;
+        }
+
         /// <summary>
         /// 登陆
         /// </summary>
@@ -84,6 +120,35 @@ namespace TrainBLL
             return package;
         }
 
+        /// <summary>
+        /// 检查登陆状态
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="loginPwd"></param>
+        /// <param name="jsonResult"></param>
+        /// <returns></returns>
+        public ResponseLogin PostCheckUser201909(out string jsonResult)
+        {
+            jsonResult = string.Empty;
+            ResponseLogin package = null;
+            RequestPackage request = new RequestPackage();
+            request.Params.Add("_json_att", "");
+            request.RequestURL = "/otn/login/checkUser";
+            request.RefererURL = "/otn/leftTicket/init";
+            request.Method = "post";
+            ArrayList list = TrainHttpContext.Send(request);
+            if (list.Count == 2)
+            {
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                package = JsonConvert.DeserializeObject<ResponseLogin>(jsonResult);
+                Log.Write(LogLevel.Info, jsonResult);
+            }
+            else
+            {
+                Log.Write(LogLevel.Info, list.ToString());
+            }
+            return package;
+        }
 
 
         /// <summary>
@@ -168,7 +233,7 @@ namespace TrainBLL
             RequestPackage request = new RequestPackage();
             try
             {
-
+                request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
                 request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
                 request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
                 request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
@@ -190,6 +255,43 @@ namespace TrainBLL
             }
             return package;
         }
+
+        /// <summary>
+        /// 验证验证码
+        /// </summary>
+        public ResponseCaptchaCheck PostCaptchaCheck201909(string point, out string jsonResult)
+        {
+            jsonResult = string.Empty;
+            ResponseCaptchaCheck package = null;
+            RequestPackage request = new RequestPackage();
+            try
+            {
+                request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
+                request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
+                request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
+                request.Params.Add("_", RandomHelp.GetRandomNumByLength(13));
+                request.Params.Add("callback", TrainHttpContext.callback);
+                request.RequestURL = "/passport/captcha/captcha-check";
+                request.RefererURL = "/otn/login/init";
+                request.Method = "post";
+                ArrayList list = TrainHttpContext.Send(request);
+                if (list.Count == 2)
+                {
+                    jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                    var resStr = jsonResult.CallBackJson();
+                    package = JsonConvert.DeserializeObject<ResponseCaptchaCheck>(resStr);
+                    Log.Write(LogLevel.Info, jsonResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                package.result_message = "验证错误";
+                package.status_code = 0000;
+                Log.Write(LogLevel.Error, "验证验证码出错");
+            }
+            return package;
+        }
+
 
         /// <summary>
         /// 验证码坐标点
@@ -248,6 +350,7 @@ namespace TrainBLL
                 SaveValidateCode(stream, url);
                 //}
                 //else
+
                 //{
                 //    Log.Write(LogLevel.Info, "请求/otn/login/init失败");
                 //}
@@ -257,6 +360,44 @@ namespace TrainBLL
                 Log.Write(LogLevel.Error, ex.Message, ex);
             }
             return new Tuple<int, string, Stream>(code, imgName, stream);
+        }
+
+        /// <summary>
+        /// 获取验证码2019年9月版本
+        /// </summary>
+        /// <returns></returns>
+        public Image GetValidateCode_201909()
+        {
+            Image img = null;
+            try
+            {
+                var num = RandomHelp.GetRandomNumByLength(13);
+                var callback = $"jQuery{RandomHelp.GetRandomNumByLength(20)}_{RandomHelp.GetRandomNumByLength(13)}";
+                RequestPackage request = new RequestPackage("/passport/captcha/captcha-image64");
+                request.Params.Add("login_site", "E");
+                request.Params.Add("module", "login");
+                request.Params.Add("rand", "sjrand");
+                request.Params.Add(num, "");
+                request.Params.Add("callback", callback);
+                request.Params.Add("_", num);
+                ArrayList list = TrainHttpContext.GetHtmlData(request);
+                if (list.Count == 3)
+                {
+                    var resStr = list[1].ToString().CallBackJson();
+                    var streamJson = JsonConvert.DeserializeObject<ResCodeImgMsg>(resStr);
+                    if (streamJson.result_code.Equals("0"))
+                        img = Base64ToImgHelp.CetFromBase64String(streamJson.image);
+                }
+                else
+                {
+                    Log.Write(LogLevel.Info, "请求/otn/login/init失败");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Write(LogLevel.Error, ex.Message, ex);
+            }
+            return img;
         }
 
         /// <summary>

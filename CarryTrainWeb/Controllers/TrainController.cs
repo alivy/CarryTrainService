@@ -104,7 +104,6 @@ namespace CarryTrainWeb.Controllers
                     result.msg = check.Item2;
                     break;
                 }
-
                 var login = train.PostLogin(user.loginName, user.loginPwd, out data);
                 if (login.result_code != 0)
                 {

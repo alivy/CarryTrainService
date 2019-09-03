@@ -22,12 +22,7 @@ namespace LiteHelp
              { "严浩淼",new UserInfo{UserName ="17620372030",UserPwd="yanhaomiao123" }},
              { "李惟",new UserInfo{UserName ="lbwei520",UserPwd="lw423108" }},
              { "孙柯",new UserInfo{UserName ="18871512430",UserPwd="sk323577" }},
+             { "严柱权",new UserInfo{UserName ="17683988920",UserPwd="Yan0920.." }}
         };
-
-
-        
-       
-
-
     }
 }
