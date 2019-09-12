@@ -32,7 +32,7 @@ namespace CarryTrainFrom
         /// <param name="e"></param>
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            this.Login();
+            Login();
         }
         /// <summary>
         /// 给用户添加数据
@@ -80,7 +80,7 @@ namespace CarryTrainFrom
             {
                 if ((result = frmLogin.ShowDialog()) == DialogResult.OK)
                 {
-                    AddUserView(frmLogin.user);
+                    AddUserView(FrmLogin.user);
                 }
             }
             return result;
@@ -107,6 +107,18 @@ namespace CarryTrainFrom
             FrmTest frmTest = new FrmTest();
             frmTest.Show();
 
+        }
+
+        /// <summary>
+        /// 添加任务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddTask_Click(object sender, EventArgs e)
+        {
+            FrmCreatTask frmTest = new FrmCreatTask();
+            
+            frmTest.Show();
         }
     }
 }

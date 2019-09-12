@@ -46,8 +46,8 @@ namespace Common.Help
             request.Accept = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
             request.Method = EHttpMethod.Get.ToString();
-            //request.Headers.Add("Accept-Language", "zh-Hans-CN,zh-Hans;q=0.5");
-            //request.Headers.Add("Accept-Encoding", "gzip,deflate");
+            request.Headers.Add("Accept-Language", "zh-Hans-CN,zh-Hans;q=0.5");
+            //request.Headers.Add("Accept-Encoding", "gzip,deflate");//此处添加后需要解码接收数据
             request.KeepAlive = true;
             request.CookieContainer = Cookie;
             try
@@ -56,7 +56,11 @@ namespace Common.Help
                 using (response = (HttpWebResponse)request.GetResponse())
                 using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
-                    Cookie.Add(response.Cookies);
+                    if (response.Cookies.Count > 0)
+                    {
+                        Cookie.Add(response.Cookies);
+                    }
+                    //Cookie.Add(response.Cookies);
                     //保存Cookies
                     list.Add(Cookie);
                     list.Add(reader.ReadToEnd());
@@ -91,8 +95,6 @@ namespace Common.Help
         {
             Stream stream = null;
             string url = HOST_URL + package.RequestURL;
-
-
             if (package.Params.Count > 0)
                 url = string.Format("{0}?{1}", url, JoinParams(package.Params));
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -148,7 +150,7 @@ namespace Common.Help
         /// <returns></returns>
         public static ArrayList Send(RequestPackage package)
         {
-
+           
             ServicePointManager.ServerCertificateValidationCallback += (se, cert, chain, sslerror) => { return true; };
             ArrayList list = new ArrayList();
             HttpWebRequest request = null;
@@ -181,6 +183,7 @@ namespace Common.Help
                 request.Referer = HOST_URL + package.RefererURL;
                 request.Method = method;
                 request.ContentLength = b.Length;
+                request.KeepAlive = true;
                 using (Stream stream = request.GetRequestStream())
                 {
                     stream.Write(b, 0, b.Length);
@@ -198,6 +201,7 @@ namespace Common.Help
                             Cookie.Add(response.Cookies);
                         }
                         list.Add(Cookie);
+                        var cookie = GetAllCookies(Cookie);
                         List<byte> dataList = new List<byte>();
                         while (true)
                         {
@@ -226,6 +230,26 @@ namespace Common.Help
                 list.Add("发生异常/n/r" + ex.Message);
             }
             return list;
+        }
+
+
+        public static List<Cookie> GetAllCookies(CookieContainer cookie)
+        {
+            List<Cookie> lstCookies = new List<Cookie>();
+            Hashtable table = (Hashtable)cookie.GetType().InvokeMember("m_domainTable",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField |
+                System.Reflection.BindingFlags.Instance, null, cookie, new object[] { });
+
+            foreach (object pathList in table.Values)
+            {
+                SortedList lstCookieCol = (SortedList)pathList.GetType().InvokeMember("m_list",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.GetField
+                    | System.Reflection.BindingFlags.Instance, null, pathList, new object[] { });
+                foreach (CookieCollection colCookies in lstCookieCol.Values)
+                    foreach (Cookie c in colCookies)
+                        lstCookies.Add(c);
+            }
+            return lstCookies;
         }
         #endregion
 

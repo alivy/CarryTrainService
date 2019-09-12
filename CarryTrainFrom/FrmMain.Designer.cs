@@ -57,6 +57,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.FrmTestBtn = new System.Windows.Forms.Button();
             this.btnDelTask = new System.Windows.Forms.Button();
             this.btnStopTask = new System.Windows.Forms.Button();
             this.btnStartTask = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@
             this.btnCompleteOrder = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.FrmTestBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserInfoView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataContactInfoView)).BeginInit();
@@ -341,6 +341,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "任务管理";
             // 
+            // FrmTestBtn
+            // 
+            this.FrmTestBtn.Location = new System.Drawing.Point(591, 20);
+            this.FrmTestBtn.Name = "FrmTestBtn";
+            this.FrmTestBtn.Size = new System.Drawing.Size(129, 39);
+            this.FrmTestBtn.TabIndex = 5;
+            this.FrmTestBtn.Text = "测试购票";
+            this.FrmTestBtn.UseVisualStyleBackColor = true;
+            this.FrmTestBtn.Click += new System.EventHandler(this.FrmTestBtn_Click);
+            // 
             // btnDelTask
             // 
             this.btnDelTask.Location = new System.Drawing.Point(445, 20);
@@ -376,6 +386,7 @@
             this.btnAddTask.TabIndex = 1;
             this.btnAddTask.Text = "添加任务";
             this.btnAddTask.UseVisualStyleBackColor = true;
+            this.btnAddTask.Click += new System.EventHandler(this.btnAddTask_Click);
             // 
             // dataGridView1
             // 
@@ -465,16 +476,6 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "未完成订单";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // FrmTestBtn
-            // 
-            this.FrmTestBtn.Location = new System.Drawing.Point(591, 20);
-            this.FrmTestBtn.Name = "FrmTestBtn";
-            this.FrmTestBtn.Size = new System.Drawing.Size(129, 39);
-            this.FrmTestBtn.TabIndex = 5;
-            this.FrmTestBtn.Text = "测试购票";
-            this.FrmTestBtn.UseVisualStyleBackColor = true;
-            this.FrmTestBtn.Click += new System.EventHandler(this.FrmTestBtn_Click);
             // 
             // FrmMain
             // 

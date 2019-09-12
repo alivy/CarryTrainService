@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AppResource.cs" />
     <Compile Include="Help\Base64ToImgHelp.cs" />
+    <Compile Include="Help\TimeHelp.cs" />
     <Compile Include="Help\ExtendedCategory.cs" />
     <Compile Include="Help\StreamHelp.cs" />
     <Compile Include="Help\RandomHelp.cs" />

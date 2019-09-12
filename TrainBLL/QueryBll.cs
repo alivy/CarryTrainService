@@ -29,12 +29,11 @@ namespace TrainBLL
             jsonString = string.Empty;
             try
             {
-
-
                 RequestPackage request = new RequestPackage();
                 request.Method = EHttpMethod.Get.ToString();
-                request.RefererURL = "/otn/leftTicket/init";
-                request.RequestURL = "/otn/leftTicket/queryZ";
+                OrderBll order = new OrderBll();
+                request.RefererURL = $"/otn/leftTicket/init?linktypeid=dc&fs=%E6%B1%89%E5%8F%A3,HKN&ts=%E6%B7%B1%E5%9C%B3,SZQ&date=2019-09-10&flag=N,N,Y";
+                request.RequestURL = "/otn/leftTicket/queryA";
                 request.Params.Add("leftTicketDTO.train_date", date);
                 request.Params.Add("leftTicketDTO.from_station", fromStation);
                 request.Params.Add("leftTicketDTO.to_station", toStation);
@@ -58,14 +57,22 @@ namespace TrainBLL
                     }
                     Log.Write(LogLevel.Info, reulst.messages);
                 }
-
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Log.Write(LogLevel.Error, $"查询出错:{ex.Message}", ex);
             }
             return reulst;
+        }
+
+
+        public string GetRefererURL(string fromStation, string fromDate, string toStation, string wfdc_flag)
+        {
+            string refererURL = "/otn/leftTicket/init";
+            fromStation = System.Web.HttpUtility.UrlEncode(fromStation);
+            toStation = System.Web.HttpUtility.UrlEncode(toStation);
+           //linktypeid=dc&fs=%E4%B8%8A%E6%B5%B7,SHH&ts=%E5%8C%97%E4%BA%AC,BJP&date=2019-10-03&flag=N,N,Y
+            return $"{refererURL}?linktypeid={wfdc_flag}&fs={fromStation},SHH&ts={toStation},BJP&date={fromStation}&flag=N,N,Y";
         }
 
         /// <summary>
@@ -125,6 +132,7 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             return Encoding.UTF8.GetString(list[1] as byte[]);
         }
+
         /// <summary>
         /// 获取乘车人信息
         /// </summary>
@@ -139,14 +147,15 @@ namespace TrainBLL
                 request.RefererURL = "/otn/confirmPassenger/initDc";
                 request.Method = "post";
                 request.Params.Add("_json_att", string.Empty);
+                request.Params.Add("REPEAT_SUBMIT_TOKEN", "b5a05749242999dc0483196134d0358c");
+                
                 ArrayList list = TrainHttpContext.Send(request);
                 string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
                 response = JsonConvert.DeserializeObject<ResponsePassenger>(jsonResult);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Log.Write(LogLevel.Error, ex.Message, ex);
             }
             return response;
         }

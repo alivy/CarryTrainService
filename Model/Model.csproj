@@ -66,6 +66,7 @@
     <Compile Include="Data\12036\Response\CodeImgMsg.cs" />
     <Compile Include="Data\CheckLoginData.cs" />
     <Compile Include="Data\CheckOrderInfoData.cs" />
+    <Compile Include="Data\SubmitOrderReferer.cs" />
     <Compile Include="Data\DataTypes.cs" />
     <Compile Include="Data\LimitBuySeatTicket.cs" />
     <Compile Include="Data\LoginData.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Model\DBContactInfo.cs" />
     <Compile Include="Model\DBUserInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="ReqSubmitOrder.cs" />
     <Compile Include="RequestPackage.cs" />
     <Compile Include="ResBase.cs" />
     <Compile Include="ResponseLoginUser.cs" />

@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Common;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -152,16 +153,17 @@ namespace CarryTrainFrom
         /// <returns></returns>
         public List<DetailData> TicketQueryFilter(List<DetailData> detailDatas, ResponseStation departureMsg)
         {
+            
             var ticketList = new List<DetailData>();
             if (multiStation.Checked)
                 ticketList = detailDatas.Where(x => x.from_station_telecode == departureMsg.StationShort).ToList();
             ticketList = detailDatas.Where(x =>
-            multiStation.Checked ? x.from_station_telecode == departureMsg.StationShort : x == x &&
-            GCar.Checked ? x.train_no.Contains("G") : x == x &&
-            DCar.Checked ? x.train_no.Contains("D") : x == x &&
-            TCar.Checked ? x.train_no.Contains("T") : x == x &&
-            ZCar.Checked ? x.train_no.Contains("Z") : x == x &&
-            KCar.Checked ? x.train_no.Contains("K") : x == x
+            multiStation.Checked ? x.from_station_telecode == departureMsg.StationShort : true &&
+            GCar.Checked ? x.train_no.Contains("G") : true &&
+            DCar.Checked ? x.train_no.Contains("D") : true &&
+            TCar.Checked ? x.train_no.Contains("T") : true &&
+            ZCar.Checked ? x.train_no.Contains("Z") : true &&
+            KCar.Checked ? x.train_no.Contains("K") : true
             ).ToList();
             return ticketList;
         }
@@ -256,7 +258,7 @@ namespace CarryTrainFrom
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-       
+
                 //获取cb_check的值
                 var checkCell = (DataGridViewCheckBoxCell)dataTrain.Rows[e.RowIndex].Cells["cb_check"];
                 var trainNoCell = (DataGridViewTextBoxCell)dataTrain.Rows[e.RowIndex].Cells["TrainNo"];
@@ -274,6 +276,41 @@ namespace CarryTrainFrom
                     //checkCell.Value = true;
                     if (TrainNumber.Items.Contains(trainNoCell.Value))
                         TrainNumber.Items.Remove(trainNoCell.Value);
+                }
+            }
+            else if (e.ColumnIndex == 23) //预定按钮
+            {
+                OrderBll order = new OrderBll();
+                LoginBll login = new LoginBll();
+                QueryBll query = new QueryBll();
+                var index = e.RowIndex;
+                var departure =  departureStation.Text;
+                var arrivals = arrivalsStation.Text;
+                var TrainId = dataTrain.Rows[e.RowIndex].Cells["TrainId"].Value.ToString();
+                ReqSubmitOrder submitOrder = new ReqSubmitOrder();
+                submitOrder.toDate = DateTime.Now.ToString("yyyy-MM-dd");
+                submitOrder.fromDate = departureDate.Value.ToString("yyyy-MM-dd");
+                submitOrder.secretStr = TrainId;
+                submitOrder.fromStationName = departure;
+                submitOrder.toStationName = arrivals;
+                submitOrder.wfdc_flag = "dc";
+                if (!(string.IsNullOrWhiteSpace(departure) && string.IsNullOrWhiteSpace(arrivals)))
+                {
+                    var departureMsg = responses.FirstOrDefault(x => x.StationName == departure);
+                    var arrivalsMsg = responses.FirstOrDefault(x => x.StationName == arrivals);
+                    submitOrder.fromStationShort = departureMsg.StationShort; // $"{departure},{departureMsg.StationShort}";
+                    submitOrder.toStationShort = arrivalsMsg.StationShort;// $"{arrivals},{arrivalsMsg.StationShort}";
+                }
+                var checkUser = login.PostCheckUser201909(out string json);
+                if (checkUser.result_code.Equals(0))
+                {
+                    var submitOrderRequest = order.SubmitOrderRequest(submitOrder);
+                    var getPassenger = query.GetPassenger();
+                    var checkOrderInfo = order.CheckOrderInfo();
+                    var getQueueCount = order.GetQueueCount();
+                    var confirmSingleForQueue = order.ConfirmGoForQueue();
+                    order.QueryOrderWaitTime201909();
+                    order.ResultOrderForWcQueue();
                 }
             }
         }
@@ -339,6 +376,15 @@ namespace CarryTrainFrom
             {
                 MessageBox.Show("请选择正确日期");
                 departureDate.Value = DateTime.Now;
+            }
+        }
+
+        private void FrmCreatTask_Load(object sender, EventArgs e)
+        {
+            var user = FrmLogin.user;
+            if (user != null)
+            {
+                dataPassenger.DataSource = user;
             }
         }
     }

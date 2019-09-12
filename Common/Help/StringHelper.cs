@@ -64,5 +64,13 @@ namespace Common
             }
             return idx;
         }
+
+
+
+
+    }
+    public static class StrStaticHelp
+    {
+
     }
 }

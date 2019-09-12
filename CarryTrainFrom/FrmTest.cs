@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,7 @@ namespace CarryTrainFrom
 
         #region 订单接口
 
-     
+
         private void CheckOrderBtn_Click(object sender, EventArgs e)
         {
             string check = orderBll.CheckOrderInfo();
@@ -57,22 +58,49 @@ namespace CarryTrainFrom
 
         private void SubmitOrderRequest_Click(object sender, EventArgs e)
         {
-            string check = orderBll.SubmitOrderRequest();
-            txt.Text = check;
+            //string check = orderBll.SubmitOrderRequest();
+            //txt.Text = check;
         }
         #endregion
 
 
-        #region 登陆接口
+        #region 订单流程测试接口
+
+        /*
+       订单接口流程
+       1./otn/login/checkUser 检查登陆
+       2./otn/leftTicket/submitOrderRequest 提交订单请求 cookie参数有tk
+       3./otn/confirmPassenger/getPassengerDTOs 乘车人信息
+       4./otn/confirmPassenger/checkOrderInfo 
+       5./otn/confirmPassenger/getQueueCount 
+       6./otn/confirmPassenger/confirmSingleForQueue
+       7./otn/confirmPassenger/queryOrderWaitTime
+       8./otn/confirmPassenger/resultOrderForDcQueue
+       */
+
         /// <summary>
-        /// 获取验证码
+        /// 订单流程接口
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            LoginBll train = new LoginBll();
-            var code = train.GetValidateCode();
+            OrderBll order = new OrderBll();
+            LoginBll login = new LoginBll();
+            QueryBll query = new QueryBll();
+            var checkUser = login.PostCheckUser201909(out string json);
+            if (!checkUser.result_code.Equals(0))
+            {
+                Log.Write(LogLevel.Error, json);
+                return;
+            }
+            //var submitOrderRequest = order.SubmitOrderRequest();
+            var getPassenger = query.GetPassenger();
+            var checkOrderInfo = order.CheckOrderInfo();
+            var getQueueCount = order.GetQueueCount();
+            var confirmSingleForQueue = order.ConfirmGoForQueue();
+            order.QueryOrderWaitTime201909();
+            order.ResultOrderForWcQueue();
         }
         #endregion
 

@@ -26,7 +26,7 @@ namespace CarryTrainFrom
         /// <summary>
         /// 获取坐标点上的坐标
         /// </summary>
-        private List<Point> points { get; set; }
+        public static List<Point> points { get; set; }
 
         public string userNmae { get; set; }
         #endregion
@@ -34,6 +34,10 @@ namespace CarryTrainFrom
 
         public FrmCode()
         {
+            LoginBll train = new LoginBll();
+            train.PostConfLogin();
+            train.GetLoginBanner();
+            train.PostUamtkStatic();
             InitializeComponent();
             LoadEvents();
         }
@@ -162,7 +166,7 @@ namespace CarryTrainFrom
         /// 获取选中坐标
         /// </summary>
         /// <returns></returns>
-        private string CodePoint()
+        public string CodePoint()
         {
             string point = string.Empty;
             foreach (var item in points)

@@ -21,7 +21,10 @@ namespace CarryTrainFrom
         public string LoginNameText { get { return txtLoginName.Text; } }
         public string LoginPwdText { get { return txtLoginPwd.Text; } }
 
-        public UserInfo user;
+        /// <summary>
+        /// 接口取得用户信息
+        /// </summary>
+        public static UserInfo user;
         #endregion
         public FrmLogin()
         {
@@ -64,9 +67,11 @@ namespace CarryTrainFrom
                 frmCode.Owner = this;
                 if ((result = frmCode.ShowDialog()) == DialogResult.OK)
                 {
+                    var points = frmCode.CodePoint();
                     UserInfo userInfo = new UserInfo();
                     userInfo.UserName = userName;
                     userInfo.UserPwd = userPwd;
+                    userInfo.Answer = points;
                     Login(userInfo);
                     Close();
                 }
@@ -110,17 +115,15 @@ namespace CarryTrainFrom
         /// <returns></returns>
         private void Login(UserInfo userInfo)
         {
-            ;
-            string data = string.Empty;
             var result = new ResultModel();
             var train = new LoginBll();
             do
             {
-                var login = train.PostLogin(userInfo.UserName, userInfo.UserPwd, out data);
+                var login = train.PostLogin201909(userInfo.UserName, userInfo.UserPwd, userInfo.Answer, out string data);
                 if (login.result_code != 0)
                 {
                     MessageBox.Show(login.result_message);
-                    Log.Write(LogLevel.Info, data);
+                    Log.Write(LogLevel.Error, data);
                     break;
                 }
 
@@ -128,21 +131,19 @@ namespace CarryTrainFrom
                 if (tk.result_code != 0)
                 {
                     MessageBox.Show(tk.result_message);
-                    Log.Write(LogLevel.Info, data);
+                    Log.Write(LogLevel.Error, data);
                     break;
                 }
-
                 var apptk = train.PostUamauthClient(tk.newapptk, out data);
-
                 if (apptk.result_code != 0)
                 {
                     MessageBox.Show(apptk.result_message);
-                    Log.Write(LogLevel.Info, data);
+                    Log.Write(LogLevel.Error, data);
                     break;
                 }
+                
                 train.PostConf();
                 train.PostInitMy12306();
-
                 userInfo.RealName = apptk.username;
                 var passenger = new QueryBll().GetPassenger();
                 //获取联系人
@@ -154,7 +155,7 @@ namespace CarryTrainFrom
                 }).ToList();
                 userInfo.State = 1;
                 user = userInfo;
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             } while (false);
         }
 

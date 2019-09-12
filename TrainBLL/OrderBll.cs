@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections;
+using System.Net;
 using System.Text;
 namespace TrainBLL
 {
@@ -10,6 +11,20 @@ namespace TrainBLL
     /// </summary>
     public class OrderBll
     {
+        /*
+       订单接口流程
+       1./otn/login/checkUser 检查登陆
+       2./otn/leftTicket/submitOrderRequest 提交订单请求 cookie参数有tk
+       3./otn/confirmPassenger/getPassengerDTOs 乘车人信息
+       4./otn/confirmPassenger/checkOrderInfo 
+       5./otn/confirmPassenger/getQueueCount 
+       6./otn/confirmPassenger/confirmSingleForQueue
+       7./otn/confirmPassenger/queryOrderWaitTime
+       8./otn/confirmPassenger/resultOrderForDcQueue
+       */
+
+
+
         /// <summary>
         /// 未完成订单查询
         /// </summary      
@@ -52,23 +67,30 @@ namespace TrainBLL
         /// <summary>
         /// 下单
         /// </summary>
-        public string SubmitOrderRequest()
+        public string SubmitOrderRequest(ReqSubmitOrder reqSubmit)
         {
+            string fromDate = reqSubmit.fromDate; //购票日期
+            string fromStation = reqSubmit.fromStationShort;
+            string toDate = reqSubmit.toDate ;//当前日期
+            string toStation = reqSubmit.toStationShort;//"北京,BJP";
+            string wfdc_flag = reqSubmit.wfdc_flag;  //dc表示单程车票 wc 往返车票
+            string fromStationName = reqSubmit.fromStationName; 
+            string toStationName = reqSubmit.toStationName;// "北京";
+            //注意，需要解码
+            string secretStr = System.Web.HttpUtility.UrlDecode(reqSubmit.secretStr);
             RequestPackage request = new RequestPackage();
             request.Method = EHttpMethod.Post.ToString();
-            request.RefererURL = "/otn/leftTicket/init";
-            request.RequestURL = "/otn/leftTicket/SubmitOrderRequest";
-            request.Params.Add("secretStr", @"Qu5jx9JXBEwjz51/MfaCQ/jlpWaXktWs5BQfckDfOC+Q7XLFrmGHZN7+WNFBsJsJciX8bzFpYCRl
-            NBeRuWKJn2eYCiV71DRtKBgBmCE4xG0 + 8H5MsZVqfsHNEDJzSySCTjR66gPelEF2JZQJABxSf4BB
-            2wXomxWjybsCvl1rYexUKRhK3bn75w3dg5cAPk8Hu8rzhaaQo61clIKUr / utahCInaenh3VHTQo0
-            8pMoqOTMHOBd / jlLFeX0NPhlOL5e45jU4uDRXgHNzFixysl / MNeFJ0zUguL42U5iemiRl4o=");
-            request.Params.Add("train_date", "2019-03-01");
-            request.Params.Add("back_train_date", "2019-03-01");
-            request.Params.Add("tour_flag", "wc");
-            request.Params.Add("purpose_codes", "ADULT");
-            request.Params.Add("query_from_station_name", "武汉");
-            request.Params.Add("query_to_station_name", "深圳");
+            request.RefererURL = GetRefererURL(fromStationName, fromStation, fromDate, toStationName, toStation, wfdc_flag);
+            request.RequestURL = "/otn/leftTicket/submitOrderRequest";
+            request.Params.Add("secretStr", secretStr);
+            request.Params.Add("train_date", fromDate);
+            request.Params.Add("back_train_date", toDate);
+            request.Params.Add("tour_flag", wfdc_flag);
+            request.Params.Add("purpose_codes", reqSubmit.purpose_codes);
+            request.Params.Add("query_from_station_name", fromStationName);
+            request.Params.Add("query_to_station_name", toStationName);
             request.Params.Add("undefined", "");
+            SubmitOrderCookie(fromDate, fromStation, toDate, toStation, wfdc_flag);
             ArrayList list = TrainHttpContext.Send(request);
             if (list.Count == 1)
             {
@@ -78,19 +100,64 @@ namespace TrainBLL
         }
 
         /// <summary>
+        /// 构建RefererURL
+        /// </summary>
+        /// <param name="refererURL"></param>
+        /// <param name="fromStation"></param>
+        /// <param name="toDate"></param>
+        /// <param name="toStation"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private string GetRefererURL(string fromStation,string fromStationShort, string fromDate, string toStation, string toStationShort, string wfdc_flag)
+        {
+            string refererURL = "/otn/leftTicket/init";
+            fromStation = System.Web.HttpUtility.UrlEncode(fromStation);
+            toStation = System.Web.HttpUtility.UrlEncode(toStation);
+            return $"{refererURL}?linktypeid={wfdc_flag}&fs={fromStation},{fromStationShort}&ts={toStation},{toStationShort}&date={fromStation}&flag=N,N,Y";
+        }
+
+
+        /// <summary>
+        /// 添加订单cookie
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="fromStation"></param>
+        /// <param name="toDate"></param>
+        /// <param name="toStation"></param>
+        /// <param name="wfdc_flag"></param>
+        public void SubmitOrderCookie(string fromDate,string fromStation,string toDate,string toStation,string wfdc_flag)
+        {
+
+            fromStation = System.Web.HttpUtility.UrlEncode(fromStation);
+            toStation = System.Web.HttpUtility.UrlEncode(toStation);
+            var _jc_save_fromDate = new Cookie("_jc_save_fromDate", fromDate, "/", "kyfw.12306.cn");
+            var _jc_save_fromStation = new Cookie("_jc_save_fromStation", fromStation, "/", "kyfw.12306.cn");
+            var _jc_save_toDate = new Cookie("_jc_save_toDate", toDate, "/", "kyfw.12306.cn");
+            var _jc_save_toStation = new Cookie("_jc_save_toStation", toStation, "/", "kyfw.12306.cn");
+            var _jc_save_wfdc_flag = new Cookie("_jc_save_wfdc_flag", wfdc_flag, "/", "kyfw.12306.cn");
+            TrainHttpContext.Cookie.Add(_jc_save_fromDate);
+            TrainHttpContext.Cookie.Add(_jc_save_fromStation);
+            TrainHttpContext.Cookie.Add(_jc_save_toDate);
+            TrainHttpContext.Cookie.Add(_jc_save_toStation);
+            TrainHttpContext.Cookie.Add(_jc_save_wfdc_flag);
+        }
+
+      
+
+        /// <summary>
         /// 订单验证
         /// </summary>
         public string CheckOrderInfo()
         {
             RequestPackage request = new RequestPackage();
             request.Method = EHttpMethod.Post.ToString();
-            request.RefererURL = "/otn/confirmPassenger/initWc";
+            request.RefererURL = "/otn/confirmPassenger/initDc"; //此数据是动态数据可能为initWc
             request.RequestURL = "/otn/confirmPassenger/checkOrderInfo";
             request.Params.Add("cancel_flag", "2");
             request.Params.Add("bed_level_order_num", "000000000000000000000000000000");
-            request.Params.Add("passengerTicketStr", "O,0,1,金曼城,1,360426199801130058,,N");
-            request.Params.Add("tour_flag", "wc");
-            request.Params.Add("randCode", "2");
+            request.Params.Add("passengerTicketStr", "杨杰,1,4209***********015,1_");
+            request.Params.Add("tour_flag", "dc");
+            request.Params.Add("randCode", "");
             request.Params.Add("whatsSelect", "1");
             request.Params.Add("_json_att", "");
             request.Params.Add("REPEAT_SUBMIT_TOKEN", "6a935f7b30fc20539538d245e07f9f3e");
@@ -122,6 +189,68 @@ namespace TrainBLL
             return Encoding.UTF8.GetString(list[1] as byte[]);
         }
 
+        /// <summary>
+        /// ConfirmSingleForQueue
+        /// </summary>
+        public string ConfirmSingleForQueue()
+        {
+            RequestPackage request = new RequestPackage();
+            request.Method = EHttpMethod.Post.ToString();
+            request.RefererURL = "/otn/confirmPassenger/initDc";
+            request.RequestURL = "/otn/confirmPassenger/ConfirmSingleForQueue";
+            request.Params.Add("passengerTicketStr", "O,0,1,杨杰,1,4209***********015,,N,2e69718bd2aac5c23e2437ce2c7298824373620db3b0f445164bd3b7eb390c36");
+            request.Params.Add("oldPassengerStr", "杨杰,1,4209***********015,1_");
+            request.Params.Add("randCode", "");
+            request.Params.Add("purpose_codes", "00");
+            request.Params.Add("key_check_isChange", "19222C51E2716A80B9D5FF165943FCB2E4D434D2F6A17F1EA366CD27");
+            request.Params.Add("leftTicket", "%2FIdT30sdMNlvjDYWzqTjuS5nAXQPCncfmH1H4z7h3MqJ2k%2Fc");
+            request.Params.Add("train_location", "H6");
+            request.Params.Add("choose_seats", "1C");
+            request.Params.Add("seatDetailType", "000");
+            request.Params.Add("whatsSelect", "1");
+            request.Params.Add("roomType", "00");
+            request.Params.Add("dwAll", "N");
+            request.Params.Add("_json_att", "");
+            request.Params.Add("REPEAT_SUBMIT_TOKEN", "b5a05749242999dc0483196134d0358c");
+            ArrayList list = TrainHttpContext.Send(request);
+            return Encoding.UTF8.GetString(list[1] as byte[]);
+        }
+
+
+        /// <summary>
+        /// QueryOrderWaitTime查询等待
+        /// </summary>
+        public string QueryOrderWaitTime()
+        {
+            RequestPackage request = new RequestPackage();
+            request.Method = EHttpMethod.Get.ToString();
+            request.RefererURL = "/otn/confirmPassenger/initDc";
+            request.RequestURL = "/otn/confirmPassenger/ConfirmSingleForQueue";
+            request.Params.Add("random", TimeHelp.GetTimeStamp(DateTime.Now));
+            request.Params.Add("tourFlag", "dc");
+            request.Params.Add("_json_att", "");
+            request.Params.Add("REPEAT_SUBMIT_TOKEN", "b5a05749242999dc0483196134d0358c");
+            ArrayList list = TrainHttpContext.Send(request);
+            return Encoding.UTF8.GetString(list[1] as byte[]);
+        }
+
+
+        /// <summary>
+        /// resultOrderForDcQueue返回消息队列结果
+        /// </summary>
+        public string ResultOrderForDcQueue()
+        {
+            RequestPackage request = new RequestPackage();
+            request.Method = EHttpMethod.Post.ToString();
+            request.RefererURL = "/otn/confirmPassenger/initDc";
+            request.RequestURL = "/otn/confirmPassenger/resultOrderForDcQueue";
+
+            request.Params.Add("orderSequence_no", "EK98416576");
+            request.Params.Add("_json_att", "");
+            request.Params.Add("REPEAT_SUBMIT_TOKEN", "b5a05749242999dc0483196134d0358c");
+            ArrayList list = TrainHttpContext.Send(request);
+            return Encoding.UTF8.GetString(list[1] as byte[]);
+        }
 
         /// <summary>
         /// 确认提交队列
@@ -150,7 +279,7 @@ namespace TrainBLL
         /// <summary>
         /// 查询订单消息
         /// </summary>
-        public string QueryOrderWaitTime()
+        public string QueryOrderWaitTime201909()
         {
             RequestPackage request = new RequestPackage();
             request.Method = EHttpMethod.Get.ToString();

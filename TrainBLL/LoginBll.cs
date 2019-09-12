@@ -10,7 +10,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrainBLL
@@ -22,6 +24,73 @@ namespace TrainBLL
     {
         #region 登陆逻辑
 
+        #region 构造登录
+
+        /// <summary>
+        /// 请求conf
+        /// </summary>
+        /// <returns></returns>
+        public string PostConfLogin()
+        {
+            RequestPackage request = new RequestPackage();
+            request.RequestURL = "/otn/login/conf";
+            request.RefererURL = "/otn/resources/login.html";
+            request.Method = "post";
+            ArrayList list = TrainHttpContext.Send(request);
+            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+            Log.Write(LogLevel.Info, jsonResult);
+            return jsonResult;
+        }
+
+        /// <summary>
+        /// 获取Banner信息
+        /// </summary>
+        /// <returns></returns>
+        public string GetLoginBanner()
+        {
+            RequestPackage request = new RequestPackage();
+            request.RequestURL = "/otn/index12306/getLoginBanner";
+            request.RefererURL = "/otn/resources/login.html";
+            request.Method = "GET";
+            ArrayList list = TrainHttpContext.Send(request);
+            string jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+            Log.Write(LogLevel.Info, jsonResult);
+            return jsonResult;
+        }
+
+        /// <summary>
+        /// 获取静态cookie
+        /// </summary>
+        /// <returns></returns>
+        public void PostUamtkStatic()
+        {
+            string jsonResult = string.Empty;
+            RequestPackage request = new RequestPackage();
+            request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
+            request.RequestURL = "/passport/web/auth/uamtk-static";
+            request.RefererURL = "/otn/resources/login.html";
+            request.Method = "post";
+            ArrayList list = TrainHttpContext.Send(request);
+            if (list.Count == 2)
+            {
+                jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
+                Log.Write(LogLevel.Info, jsonResult);
+            }
+            else
+            {
+                Log.Write(LogLevel.Info, list.ToString());
+            }
+        }
+
+
+        #endregion
+
+
+
+        #region 版本：201909
+
+
+
 
         /// <summary>
         /// 登陆
@@ -30,7 +99,7 @@ namespace TrainBLL
         /// <param name="loginPwd"></param>
         /// <param name="jsonResult"></param>
         /// <returns></returns>
-        public ResponseLogin PostLoginV1(string loginName, string loginPwd, string point, out string jsonResult)
+        public ResponseLogin PostLogin201909(string loginName, string loginPwd, string point, out string jsonResult)
         {
             jsonResult = string.Empty;
             ResponseLogin package = null;
@@ -40,9 +109,15 @@ namespace TrainBLL
             request.Params.Add("appid", System.Web.HttpUtility.UrlEncode("otn"));
             request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
             request.RequestURL = "/passport/web/login";
-            request.RefererURL = "/otn/login/init";
+            request.RefererURL = "/otn/resources/login.html";
             request.Method = "post";
+
+            var RAIL_EXPIRATION = new Cookie("RAIL_EXPIRATION", TimeHelp.GetTimeStamp(DateTime.Now.AddDays(3)), "/", ".12306.cn");
+            var RAIL_DEVICEID = new Cookie("RAIL_DEVICEID", "K_89QjQR37H4I9URxTkeSVTXd2WIyViZrlUuxJA5A8p7xCM_3JGueLa4zc2t_T69vTHb1aDx-3ymUdCUrLXbPcb68Z-4pQAYOmF8i6rU0Nk7Q6HIfzMVHY5PIQPK16sfWaJc-Z08UcYMLepVR56jG1NrsBYZooob", "/", ".12306.cn");
+            TrainHttpContext.Cookie.Add(RAIL_EXPIRATION);
+            TrainHttpContext.Cookie.Add(RAIL_DEVICEID);
             ArrayList list = TrainHttpContext.Send(request);
+
             if (list.Count == 2)
             {
                 jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
@@ -55,7 +130,9 @@ namespace TrainBLL
             }
             return package;
         }
+        #endregion
 
+        #region 版本：201812
         /// <summary>
         /// 登陆
         /// </summary>
@@ -87,8 +164,6 @@ namespace TrainBLL
             }
             return package;
         }
-
-
 
         /// <summary>
         /// 检查登陆状态
@@ -164,6 +239,8 @@ namespace TrainBLL
             ArrayList list = TrainHttpContext.Send(request);
             jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             ResponseUamtk package = JsonConvert.DeserializeObject<ResponseUamtk>(jsonResult);
+            /*TrainHttpContext.Cookie.Add()*/
+            ;
             Log.Write(LogLevel.Info, jsonResult);
             return package;
         }
@@ -181,9 +258,14 @@ namespace TrainBLL
             request.RefererURL = "/otn/passport?redirect=/otn/login/userLogin";
             request.Method = "post";
             ArrayList list = TrainHttpContext.Send(request);
-
             jsonResult = Encoding.UTF8.GetString(list[1] as byte[]);
             ResponseUamauthClient package = JsonConvert.DeserializeObject<ResponseUamauthClient>(jsonResult);
+            if (package.result_code.Equals("0"))
+            {
+                //var apptk = Regex.Replace(package.apptk, @"\s", "").Replace("-", "");
+                //var tkCookie = new Cookie("tk", apptk, "/", "kyfw.12306.cn");
+                //TrainHttpContext.Cookie.Add(tkCookie);
+            }
             Log.Write(LogLevel.Info, jsonResult);
             return package;
         }
@@ -220,6 +302,7 @@ namespace TrainBLL
             return jsonResult;
         }
 
+        #endregion
         #endregion
 
         #region 验证码逻辑
@@ -258,6 +341,7 @@ namespace TrainBLL
 
         /// <summary>
         /// 验证验证码
+        /// 版本：201909
         /// </summary>
         public ResponseCaptchaCheck PostCaptchaCheck201909(string point, out string jsonResult)
         {
@@ -269,10 +353,10 @@ namespace TrainBLL
                 request.Params.Add("rand", System.Web.HttpUtility.UrlEncode("sjrand"));
                 request.Params.Add("answer", System.Web.HttpUtility.UrlEncode(point));
                 request.Params.Add("login_site", System.Web.HttpUtility.UrlEncode("E"));
-                request.Params.Add("_", RandomHelp.GetRandomNumByLength(13));
+                request.Params.Add("_", TimeHelp.GetTimeStamp(DateTime.Now));
                 request.Params.Add("callback", TrainHttpContext.callback);
                 request.RequestURL = "/passport/captcha/captcha-check";
-                request.RefererURL = "/otn/login/init";
+                request.RefererURL = "https://kyfw.12306.cn/otn/resources/login.html";
                 request.Method = "post";
                 ArrayList list = TrainHttpContext.Send(request);
                 if (list.Count == 2)
@@ -371,8 +455,8 @@ namespace TrainBLL
             Image img = null;
             try
             {
-                var num = RandomHelp.GetRandomNumByLength(13);
-                var callback = $"jQuery{RandomHelp.GetRandomNumByLength(20)}_{RandomHelp.GetRandomNumByLength(13)}";
+                var num = TimeHelp.GetTimeStamp(DateTime.Now);
+                var callback = $"jQuery{RandomHelp.GetRandomNumByLength(20)}_{TimeHelp.GetTimeStamp(DateTime.Now)}";
                 RequestPackage request = new RequestPackage("/passport/captcha/captcha-image64");
                 request.Params.Add("login_site", "E");
                 request.Params.Add("module", "login");
@@ -424,5 +508,8 @@ namespace TrainBLL
             return result;
         }
         #endregion
+
+
+
     }
 }

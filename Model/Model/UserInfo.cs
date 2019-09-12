@@ -15,10 +15,16 @@ namespace Model.Model
         /// 用户登录名称
         /// </summary>
         public string UserName { get; set; }
+
         /// <summary>
         /// 用户登录密码
         /// </summary>
         public string UserPwd { get; set; }
+
+        /// <summary>
+        /// 坐标
+        /// </summary>
+        public string Answer { get; set; }
 
         /// <summary>
         /// 用户真实姓名
